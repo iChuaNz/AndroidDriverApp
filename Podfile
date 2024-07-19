@@ -13,7 +13,7 @@ pod 'FirebaseCommunity', :git => 'https://github.com/firebase/firebase-ios-sdk.g
 pod 'GooglePlaces'
 pod 'GooglePlacePicker'
 pod 'GoogleMaps'
-pod 'Stripe'
+#pod 'Stripe'
 pod 'MKDropdownMenu'
 pod 'THCalendarDatePicker', '~> 1.2.6'
 pod 'RPVerticalStepper', '~> 0.0'

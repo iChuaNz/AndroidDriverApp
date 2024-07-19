@@ -74,7 +74,6 @@
 		6DA666801DD4292C00014BE7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6667F1DD4292C00014BE7 /* main.m */; };
 		6DA666831DD4292C00014BE7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA666821DD4292C00014BE7 /* AppDelegate.m */; };
 		6DA666861DD4292C00014BE7 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DA666851DD4292C00014BE7 /* LoginViewController.m */; };
-		6DA666891DD4292C00014BE7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA666871DD4292C00014BE7 /* Main.storyboard */; };
 		6DA6668C1DD4292C00014BE7 /* DriverApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6DA6668A1DD4292C00014BE7 /* DriverApp.xcdatamodeld */; };
 		6DA666911DD4292C00014BE7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6DA6668F1DD4292C00014BE7 /* LaunchScreen.storyboard */; };
 		6DA6669B1DD44A7A00014BE7 /* Constants.h in Resources */ = {isa = PBXBuildFile; fileRef = 6DA6669A1DD44A7A00014BE7 /* Constants.h */; };
@@ -128,6 +127,8 @@
 		6DEAA49A1E13706F0090ACFB /* bus.png in Resources */ = {isa = PBXBuildFile; fileRef = 6DEAA4991E13706F0090ACFB /* bus.png */; };
 		6DEAA4F01E13B97C0090ACFB /* libACSBluetooth.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6DEAA4EF1E13B97C0090ACFB /* libACSBluetooth.a */; };
 		7033C05788FC25248086E898 /* libPods-DriverApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FE3A1B17F9ED40154DD7B1 /* libPods-DriverApp.a */; };
+		7FB30FA72C4A129B0094284F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB30FA52C4A129B0094284F /* LaunchScreen.storyboard */; };
+		7FB30FAA2C4A12B70094284F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FB30FA82C4A12B70094284F /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -223,7 +224,6 @@
 		6DA666821DD4292C00014BE7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		6DA666841DD4292C00014BE7 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		6DA666851DD4292C00014BE7 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
-		6DA666881DD4292C00014BE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6DA6668B1DD4292C00014BE7 /* DriverApp.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DriverApp.xcdatamodel; sourceTree = "<group>"; };
 		6DA6668D1DD4292C00014BE7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6DA666901DD4292C00014BE7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -290,6 +290,8 @@
 		6DEAA4ED1E13B97C0090ACFB /* ABTError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ABTError.h; sourceTree = "<group>"; };
 		6DEAA4EE1E13B97C0090ACFB /* ACSBluetooth.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ACSBluetooth.h; sourceTree = "<group>"; };
 		6DEAA4EF1E13B97C0090ACFB /* libACSBluetooth.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libACSBluetooth.a; sourceTree = "<group>"; };
+		7FB30FA62C4A129B0094284F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		7FB30FA92C4A12B70094284F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		A0FE3A1B17F9ED40154DD7B1 /* libPods-DriverApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DriverApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -375,7 +377,8 @@
 				6DCD45341DFFB3C00033CE21 /* Resources */,
 				6DA666811DD4292C00014BE7 /* AppDelegate.h */,
 				6DA666821DD4292C00014BE7 /* AppDelegate.m */,
-				6DA666871DD4292C00014BE7 /* Main.storyboard */,
+				7FB30FA82C4A12B70094284F /* Main.storyboard */,
+				7FB30FA52C4A129B0094284F /* LaunchScreen.storyboard */,
 				6DA6668D1DD4292C00014BE7 /* Assets.xcassets */,
 				6DA6668F1DD4292C00014BE7 /* LaunchScreen.storyboard */,
 				6DA666921DD4292C00014BE7 /* Info.plist */,
@@ -672,6 +675,7 @@
 				6DBFAE501E76816A0025745A /* refresh.png in Resources */,
 				6DBFAE4E1E767F2C0025745A /* info.png in Resources */,
 				6DBFAE4C1E767B860025745A /* send.png in Resources */,
+				7FB30FA72C4A129B0094284F /* LaunchScreen.storyboard in Resources */,
 				6D5218001E63DAEF006B5E44 /* Camera.png in Resources */,
 				6D5218011E63DAEF006B5E44 /* Message.png in Resources */,
 				6D5218021E63DAEF006B5E44 /* Picture.png in Resources */,
@@ -710,7 +714,7 @@
 				6DCD45521E0124740033CE21 /* zero.mp3 in Resources */,
 				6DC2F3771F9F3F3000A0314F /* Assets.xcassets in Resources */,
 				6D5A7BCE203EBDDA00B2B58E /* viewcontractjob.png in Resources */,
-				6DA666891DD4292C00014BE7 /* Main.storyboard in Resources */,
+				7FB30FAA2C4A12B70094284F /* Main.storyboard in Resources */,
 				6DA3B80A1DD997EE00D28573 /* GoogleMaps.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -736,8 +740,6 @@
 				"${PODS_ROOT}/RPVerticalStepper/RPVerticalStepper/Stepper Images/stepperPlusSymbol@2x.png",
 				"${PODS_ROOT}/RPVerticalStepper/RPVerticalStepper/Stepper Images/stepperTopButton.png",
 				"${PODS_ROOT}/RPVerticalStepper/RPVerticalStepper/Stepper Images/stepperTopButton@2x.png",
-				"${PODS_ROOT}/Stripe/InternalFrameworks/Stripe3DS2.bundle",
-				"${PODS_CONFIGURATION_BUILD_DIR}/Stripe/Stripe.bundle",
 				"${PODS_ROOT}/THCalendarDatePicker/THCalendarDatePicker/THDateDay.xib",
 				"${PODS_ROOT}/THCalendarDatePicker/THCalendarDatePicker/THDatePickerViewController.xib",
 				"${PODS_ROOT}/THCalendarDatePicker/THCalendarDatePicker/Images.xcassets",
@@ -756,8 +758,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/stepperPlusSymbol@2x.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/stepperTopButton.png",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/stepperTopButton@2x.png",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Stripe3DS2.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Stripe.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/THDateDay.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/THDatePickerViewController.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
@@ -831,20 +831,28 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6DA666871DD4292C00014BE7 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6DA666881DD4292C00014BE7 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6DA6668F1DD4292C00014BE7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				6DA666901DD4292C00014BE7 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7FB30FA52C4A129B0094284F /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7FB30FA62C4A129B0094284F /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7FB30FA82C4A12B70094284F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7FB30FA92C4A12B70094284F /* Base */,
+			);
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

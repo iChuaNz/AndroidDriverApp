@@ -49,7 +49,6 @@ PODS:
   - nanopb/encode (0.3.8)
   - Protobuf (3.4.0)
   - RPVerticalStepper (0.0.1)
-  - Stripe (19.3.0)
   - THCalendarDatePicker (1.2.8):
     - KNSemiModalViewController_hons82 (~> 0.4.5)
   - XLForm (3.3.0)
@@ -65,7 +64,6 @@ DEPENDENCIES:
   - LGPlusButtonsView (~> 1.1.0)
   - MKDropdownMenu
   - RPVerticalStepper (~> 0.0)
-  - Stripe
   - THCalendarDatePicker (~> 1.2.6)
   - XLForm (~> 3.3)
 
@@ -87,7 +85,6 @@ SPEC REPOS:
     - nanopb
     - Protobuf
     - RPVerticalStepper
-    - Stripe
     - THCalendarDatePicker
     - XLForm
 
@@ -118,10 +115,9 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   RPVerticalStepper: 3ac24353afc946fd5d7f01b79f1a32198332d121
-  Stripe: dd5bfdd5f1daed4f9ddbfb47e9449ec302f9f708
   THCalendarDatePicker: fd1a1103ae0d1d1f2d0f9a1463a3f628a23a25a5
   XLForm: d5c391dfc62865927b5bcab0a5a0dbfb3e02b0ec
 
-PODFILE CHECKSUM: ea5c62076871854641b1ccbcd7de1d07ab866976
+PODFILE CHECKSUM: eed9835bdfb1f1b86845fc1c6a9c8a74f216db8e
 
-COCOAPODS: 1.9.1
+COCOAPODS: 1.14.3
