@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="BLPartnerApp" customModuleProvider="target">
+            <connections>
+                <outlet property="phoneNumberTF" destination="sjW-3M-XFe" id="QyT-tw-7tE"/>
+                <outlet property="submitButton" destination="gid-0Y-06o" id="iDR-hF-qxA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your phone number here" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sjW-3M-XFe">
+                    <rect key="frame" x="20" y="160.33333333333334" width="353" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                </textField>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Login With your Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YCg-S3-HYq">
+                    <rect key="frame" x="50.666666666666657" y="119.33333333333331" width="292" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gid-0Y-06o">
+                    <rect key="frame" x="163.66666666666666" y="254.33333333333337" width="65.666666666666657" height="35"/>
+                    <color key="tintColor" red="1" green="0.54515136689999999" blue="0.14942069920000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Login"/>
+                    <connections>
+                        <action selector="submitButtonTapped:" destination="-1" eventType="touchUpInside" id="HgY-Fe-J1y"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iaJ-E2-AQr">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
+                    <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="70" id="pQL-xN-Gnn"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Buslink" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fhL-EQ-jXl">
+                    <rect key="frame" x="122.00000000000001" y="79" width="149.33333333333337" height="20.333333333333329"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="sjW-3M-XFe" secondAttribute="trailing" constant="20" id="3sb-An-GuE"/>
+                <constraint firstItem="sjW-3M-XFe" firstAttribute="top" secondItem="YCg-S3-HYq" secondAttribute="bottom" constant="20" id="4wD-tW-ezQ"/>
+                <constraint firstItem="iaJ-E2-AQr" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5F8-0N-Tbt"/>
+                <constraint firstItem="YCg-S3-HYq" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="JaS-QB-afZ"/>
+                <constraint firstItem="YCg-S3-HYq" firstAttribute="top" secondItem="fhL-EQ-jXl" secondAttribute="bottom" constant="20" id="QUR-7w-DB6"/>
+                <constraint firstItem="sjW-3M-XFe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="Yek-I4-UGw"/>
+                <constraint firstItem="fhL-EQ-jXl" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="gSO-dh-8lg"/>
+                <constraint firstItem="iaJ-E2-AQr" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gwU-tz-zys"/>
+                <constraint firstItem="fhL-EQ-jXl" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="pdu-mA-q0y"/>
+                <constraint firstItem="gid-0Y-06o" firstAttribute="top" secondItem="sjW-3M-XFe" secondAttribute="bottom" constant="60" id="qtw-b3-eQB"/>
+                <constraint firstAttribute="trailing" secondItem="iaJ-E2-AQr" secondAttribute="trailing" id="vD8-4L-IQt"/>
+                <constraint firstItem="gid-0Y-06o" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zCq-CC-ed7"/>
+            </constraints>
+            <point key="canvasLocation" x="35.877862595419849" y="19.718309859154932"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

@@ -1,0 +1,6 @@
+framework module Pods_BLPartnerAppTests {
+  umbrella header "Pods-BLPartnerAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
