@@ -12,22 +12,30 @@ import FirebaseMessaging
 import FirebaseCore
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        // Request notification permissions
+        FirebaseApp.configure()
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+        
+        application.registerForRemoteNotifications()
+        
+        Messaging.messaging().delegate = self
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         let navVC = UINavigationController(rootViewController: LoginViewController())
         window?.rootViewController = navVC
         window?.makeKeyAndVisible()
-        newSetupFirebase(app: application)
         
         Wormholy.shakeEnabled = true
-        setupFirebase()
-        setupMessagingFirebase()
-        
         return true
     }
 
@@ -46,16 +54,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        Messaging.messaging().apnsToken = deviceToken
-        UserDefaults.standard.set(deviceToken, forKey: "DeviceToken")
-        print("==== \(deviceToken)")
-    }
+          Messaging.messaging().apnsToken = deviceToken
+      }
     
-    private func setupFirebase() {
-        let filePath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!
-        if let options = FirebaseOptions(contentsOfFile: filePath) {
-            FirebaseApp.configure(options: options)
-        } else { FirebaseApp.configure() }
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: any Error) {
+        print("=== \(error)")
     }
 }
 
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("=== FCM token: \(fcmToken ?? "")")
+        saveFCMTokenToLocal(fcmToken ?? "")
+    }
+    
+    func saveFCMTokenToLocal(_ fcmToken: String) {
+        UserDefaults.standard.set(fcmToken, forKey: "FCMToken")
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        // Handle the notification content
+        
+        completionHandler([.alert, .sound])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                didReceive response: UNNotificationResponse,
+                                withCompletionHandler completionHandler: @escaping () -> Void) {
+        let userInfo = response.notification.request.content.userInfo
+        // Handle the notification content
+        
+        completionHandler()
+    }
+    
+}

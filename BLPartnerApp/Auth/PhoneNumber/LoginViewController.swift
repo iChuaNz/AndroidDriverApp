@@ -20,26 +20,13 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
-        postLogin(with: phoneNumberTF.text ?? "", phoneNumber: phoneNumberTF.text ?? "")
-        print("==== \(UserDefaults.standard.string(forKey: "DeviceToken"))")
+        routeToPasscode()
     }
     
-    func routeToHome() {
+    func routeToPasscode() {
         let vc = PasscodeViewController()
+        vc.phoneNumber = phoneNumberTF.text ?? ""
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
-    func postLogin(with passcode: String, phoneNumber: String) {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            self.service.postLogin(endpoint: .getLogin(passcode, phoneNumber)) { [weak self] result in
-                guard let self = self else { return }
-                switch result {
-                case .success(let articles):
-                    routeToHome()
-                case .failure(let error):
-                    routeToHome()
-                }
-            }
-        }
-    }
 }

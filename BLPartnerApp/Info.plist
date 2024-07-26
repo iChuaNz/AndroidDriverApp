@@ -2,8 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
+		<key>FirebaseMessagingAutoInitEnabled</key>
+		<false/>
 		<key>UIApplicationSupportsMultipleScenes</key>
 		<false/>
 		<key>UISceneConfigurations</key>
@@ -19,5 +23,18 @@
 			</array>
 		</dict>
 	</dict>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>bluetooth-central</string>
+		<string>external-accessory</string>
+		<string>fetch</string>
+		<string>location</string>
+		<string>remote-notification</string>
+	</array>
+	<key>LSApplicationCategoryType</key>
+	<string>&lt;dict&gt;
+    &lt;key&gt;aps-environment&lt;/key&gt;
+    &lt;string&gt;development&lt;/string&gt; &lt;!-- or &quot;production&quot; for App Store builds --&gt;
+&lt;/dict&gt;</string>
 </dict>
 </plist>
