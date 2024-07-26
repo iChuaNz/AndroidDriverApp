@@ -10,6 +10,8 @@ import Wormholy
 import Firebase
 import FirebaseMessaging
 import FirebaseCore
+import GoogleMaps
+import GooglePlaces
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,7 +38,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         Wormholy.shakeEnabled = true
+        setupGoogleMapsAPI()
         return true
+    }
+    
+    func setupGoogleMapsAPI() {
+        GMSServices.provideAPIKey("AIzaSyBH9LPkAElCsLdUkD8zCW0jS5aWn1jyauo")
+        GMSPlacesClient.provideAPIKey("AIzaSyBH9LPkAElCsLdUkD8zCW0jS5aWn1jyauo")
     }
 
     // MARK: UISceneSession Lifecycle

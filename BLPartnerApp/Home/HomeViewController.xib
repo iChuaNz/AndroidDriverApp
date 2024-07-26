@@ -3,7 +3,6 @@
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
-        <capability name="Map view configurations" minToolsVersion="14.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,7 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="BLPartnerApp" customModuleProvider="target">
             <connections>
                 <outlet property="containerSetting" destination="qKq-zt-g1D" id="GXf-wb-NjH"/>
-                <outlet property="mapView" destination="Pum-yO-yAi" id="iy7-37-be6"/>
+                <outlet property="mapView" destination="Uq5-Qb-hoS" id="rCz-05-E0L"/>
                 <outlet property="settingLabel" destination="Jaw-lD-bCF" id="sO5-3q-OJ9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -22,10 +21,6 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pum-yO-yAi">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
-                    <standardMapConfiguration key="preferredConfiguration"/>
-                </mapView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Woc-v3-wOF">
                     <rect key="frame" x="0.0" y="59" width="393" height="60"/>
                     <subviews>
@@ -91,23 +86,27 @@
                         <constraint firstItem="gyk-mT-mly" firstAttribute="centerY" secondItem="wMe-gc-MPP" secondAttribute="centerY" id="jd6-OT-FVI"/>
                     </constraints>
                 </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uq5-Qb-hoS">
+                    <rect key="frame" x="0.0" y="119" width="393" height="499"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" red="1" green="0.54515136689999999" blue="0.14942069920000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
+                <constraint firstItem="Uq5-Qb-hoS" firstAttribute="top" secondItem="Woc-v3-wOF" secondAttribute="bottom" id="0Rc-lu-628"/>
                 <constraint firstItem="Woc-v3-wOF" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="3VV-p3-s8M"/>
+                <constraint firstItem="wMe-gc-MPP" firstAttribute="top" secondItem="Uq5-Qb-hoS" secondAttribute="bottom" id="5Jm-co-tyZ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wMe-gc-MPP" secondAttribute="trailing" id="Cfn-w7-4Rk"/>
                 <constraint firstItem="wMe-gc-MPP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="FAU-yC-fwP"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rn0-fc-bov" secondAttribute="trailing" id="Lja-Js-RaE"/>
                 <constraint firstItem="Woc-v3-wOF" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="N87-Tl-uF1"/>
-                <constraint firstItem="Pum-yO-yAi" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Xur-NY-a9V"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Pum-yO-yAi" secondAttribute="bottom" id="ayU-Mr-arN"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Pum-yO-yAi" secondAttribute="trailing" id="hpR-R3-Blo"/>
+                <constraint firstItem="Uq5-Qb-hoS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="WCh-pt-cjn"/>
                 <constraint firstItem="rn0-fc-bov" firstAttribute="top" secondItem="wMe-gc-MPP" secondAttribute="bottom" id="jK1-KE-WBr"/>
-                <constraint firstItem="Pum-yO-yAi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="kgz-VQ-tWf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Woc-v3-wOF" secondAttribute="trailing" id="lSH-C1-koM"/>
                 <constraint firstItem="rn0-fc-bov" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rZi-NF-cQr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="rn0-fc-bov" secondAttribute="bottom" id="sTT-HI-xth"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uq5-Qb-hoS" secondAttribute="trailing" id="ubn-Gr-sBr"/>
             </constraints>
             <point key="canvasLocation" x="-14.503816793893129" y="19.718309859154932"/>
         </view>

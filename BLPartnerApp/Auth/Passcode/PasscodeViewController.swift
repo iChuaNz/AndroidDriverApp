@@ -12,6 +12,7 @@ class PasscodeViewController: UIViewController {
     @IBOutlet weak var welcomeTitle: UILabel!
     @IBOutlet weak var passcodeTF: UITextField!
     @IBOutlet weak var submitPasscodeButton: UIButton!
+    @IBOutlet weak var subTitleLabel: UILabel!
     
     var phoneNumber: String = ""
     

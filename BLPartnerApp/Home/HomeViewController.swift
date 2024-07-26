@@ -7,9 +7,12 @@
 
 import UIKit
 import MapKit
+import GoogleMaps
+import GooglePlaces
 
 class HomeViewController: UIViewController {
-    @IBOutlet weak var mapView: MKMapView!
+    
+    @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var containerSetting: UIView!
     @IBOutlet weak var settingLabel: UILabel!
     
@@ -21,6 +24,13 @@ class HomeViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    func setupMaps() {
+        let camera = GMSCameraPosition.camera(
+            withLatitude:  1.290270, longitude: 103.851959, zoom: 17.0
+        )
+        self.mapView.camera = camera
     }
     
     func setupSetting(){
