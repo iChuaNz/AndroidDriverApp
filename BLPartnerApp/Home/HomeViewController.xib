@@ -10,8 +10,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController" customModule="BLPartnerApp" customModuleProvider="target">
             <connections>
+                <outlet property="containerEndtTripView" destination="wMe-gc-MPP" id="wTV-H5-c7X"/>
+                <outlet property="containerRouteCode" destination="rn0-fc-bov" id="dw0-dl-2QQ"/>
                 <outlet property="containerSetting" destination="qKq-zt-g1D" id="GXf-wb-NjH"/>
+                <outlet property="endTripLabel" destination="gyk-mT-mly" id="ivg-Px-WT1"/>
                 <outlet property="mapView" destination="Uq5-Qb-hoS" id="rCz-05-E0L"/>
+                <outlet property="routeCodeLabel" destination="Mov-Px-SOr" id="KwC-YA-6qi"/>
                 <outlet property="settingLabel" destination="Jaw-lD-bCF" id="sO5-3q-OJ9"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -21,6 +25,10 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uq5-Qb-hoS" customClass="GMSMapView">
+                    <rect key="frame" x="0.0" y="119" width="393" height="499"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Woc-v3-wOF">
                     <rect key="frame" x="0.0" y="59" width="393" height="60"/>
                     <subviews>
@@ -85,10 +93,6 @@
                         <constraint firstItem="gyk-mT-mly" firstAttribute="centerX" secondItem="wMe-gc-MPP" secondAttribute="centerX" id="i9t-fP-8cj"/>
                         <constraint firstItem="gyk-mT-mly" firstAttribute="centerY" secondItem="wMe-gc-MPP" secondAttribute="centerY" id="jd6-OT-FVI"/>
                     </constraints>
-                </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uq5-Qb-hoS">
-                    <rect key="frame" x="0.0" y="119" width="393" height="499"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

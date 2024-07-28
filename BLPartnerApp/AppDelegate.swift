@@ -43,8 +43,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupGoogleMapsAPI() {
-        GMSServices.provideAPIKey("AIzaSyBH9LPkAElCsLdUkD8zCW0jS5aWn1jyauo")
-        GMSPlacesClient.provideAPIKey("AIzaSyBH9LPkAElCsLdUkD8zCW0jS5aWn1jyauo")
+        GMSServices.provideAPIKey("AIzaSyCZpMc4nenyneNh3IQME-GHwu1h8Smkyl0")
+//        GMSPlacesClient.provideAPIKey("AIzaSyBH9LPkAElCsLdUkD8zCW0jS5aWn1jyauo")
     }
 
     // MARK: UISceneSession Lifecycle
