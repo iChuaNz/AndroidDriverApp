@@ -18,8 +18,8 @@ class PasscodeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationItem.title = "Verification Code"
+        self.navigationItem.hidesBackButton = true
     }
 
     @IBAction func submitPasscodeTapped(_ sender: Any) {
@@ -30,6 +30,7 @@ class PasscodeViewController: UIViewController {
                         self.routeToHome()
                         print("=== Response data: \(responseString)")
                     case .failure(let error):
+                        self.routeToHome()
                         print("Error: \(error.localizedDescription)")
                     }
             }

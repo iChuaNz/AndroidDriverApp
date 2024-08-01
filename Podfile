@@ -21,6 +21,7 @@ target 'BLPartnerApp' do
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
+  pod 'JGProgressHUD'
 	
 
   target 'BLPartnerAppTests' do

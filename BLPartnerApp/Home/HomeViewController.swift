@@ -13,21 +13,28 @@ import GooglePlaces
 class HomeViewController: UIViewController {
     
     @IBOutlet weak var mapView: GMSMapView!
-    @IBOutlet weak var containerSetting: UIView!
-    @IBOutlet weak var settingLabel: UILabel!
+//    @IBOutlet weak var containerSetting: UIView!
+//    @IBOutlet weak var settingLabel: UILabel!
     @IBOutlet weak var containerEndtTripView: UIView!
     @IBOutlet weak var routeCodeLabel: UILabel!
     @IBOutlet weak var containerRouteCode: UIView!
     @IBOutlet weak var endTripLabel: UILabel!
+    @IBOutlet weak var markerImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        mapView.delegate = self
         setupMaps()
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
+        self.navigationItem.hidesBackButton = true
+        let customBackButton = UIBarButtonItem(
+            title: "Setting",
+            style: .plain,
+            target: self,
+            action: #selector(handleTap))
+        self.navigationItem.leftBarButtonItem = customBackButton
+        self.navigationItem.title = "Tracker"
     }
     
     func setupMaps() {
@@ -37,15 +44,17 @@ class HomeViewController: UIViewController {
             )
             self.mapView.camera = camera
         }
+        
         self.mapView.bringSubviewToFront(containerEndtTripView)
-        setupSetting()
+        self.mapView.bringSubviewToFront(markerImageView)
+//        setupSetting()
     }
     
-    func setupSetting(){
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
-        containerSetting.addGestureRecognizer(tapGesture)
-    }
-    
+//    func setupSetting(){
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
+//        containerSetting.addGestureRecognizer(tapGesture)
+//    }
+//    
     @objc func handleTap(_ sender: UITapGestureRecognizer) {
         let vc = SettingViewController()
         navigationController?.pushViewController(vc, animated: false)

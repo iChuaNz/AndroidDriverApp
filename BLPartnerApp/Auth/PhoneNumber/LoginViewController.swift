@@ -16,7 +16,11 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.title = "Login"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.hidesBackButton = true
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
@@ -28,5 +32,4 @@ class LoginViewController: UIViewController {
         vc.phoneNumber = phoneNumberTF.text ?? ""
         self.navigationController?.pushViewController(vc, animated: false)
     }
-    
 }

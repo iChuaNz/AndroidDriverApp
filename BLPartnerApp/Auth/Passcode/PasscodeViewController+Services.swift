@@ -18,7 +18,7 @@ extension PasscodeViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.addValue("application/json", forHTTPHeaderField: "Accept")
+        
         
         let parameters: [String: Any] = [
             "username": username,
@@ -30,12 +30,13 @@ extension PasscodeViewController {
         
         // Create a URLSession
         let session = URLSession.shared
-        
+        BasicAlert.shared.showLoading(self.view)
         // Create the data task
         let task = session.dataTask(with: request) { data, response, error in
             // Handle the response
             if let error = error {
                 DispatchQueue.main.async {
+                    BasicAlert.shared.dismiss()
                     completion(.failure(error))
                 }
                 return
@@ -44,6 +45,7 @@ extension PasscodeViewController {
             guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
                 let responseError = NSError(domain: "InvalidResponse", code: 0, userInfo: nil)
                 DispatchQueue.main.async {
+                    BasicAlert.shared.dismiss()
                     completion(.failure(responseError))
                 }
                 return
@@ -51,11 +53,13 @@ extension PasscodeViewController {
             
             if let data = data, let responseString = String(data: data, encoding: .utf8) {
                 DispatchQueue.main.async {
+                    BasicAlert.shared.dismiss()
                     completion(.success(responseString))
                 }
             } else {
                 let parseError = NSError(domain: "DataParseError", code: 0, userInfo: nil)
                 DispatchQueue.main.async {
+                    BasicAlert.shared.dismiss()
                     completion(.failure(parseError))
                 }
             }
