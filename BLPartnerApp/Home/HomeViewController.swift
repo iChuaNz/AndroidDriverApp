@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.hidesBackButton = true
         let customBackButton = UIBarButtonItem(
-            title: "Setting",
+            title: "Profile",
             style: .plain,
             target: self,
             action: #selector(handleTap))
