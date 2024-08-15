@@ -17,6 +17,8 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Login"
+        self.submitButton.isEnabled = false
+        phoneNumberTF.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -31,5 +33,12 @@ class LoginViewController: UIViewController {
         let vc = PasscodeViewController()
         vc.phoneNumber = phoneNumberTF.text ?? ""
         self.navigationController?.pushViewController(vc, animated: false)
+    }
+}
+
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.submitButton.isEnabled = true
+//        self.submitButton.tintColor = UIColor(hex: "FF8B26")
     }
 }

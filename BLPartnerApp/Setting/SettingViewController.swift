@@ -18,6 +18,10 @@ class SettingViewController: UIViewController {
     @IBOutlet weak var versionTitle: UILabel!
     @IBOutlet weak var versionValue: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
+    @IBOutlet weak var buildNumberTitleLabel: UILabel!
+    @IBOutlet weak var buildNumberValueLabel: UILabel!
+    
+    var userData: UserData?
     
     
     override func viewDidLoad() {
@@ -41,7 +45,9 @@ class SettingViewController: UIViewController {
     
     func setupUI () {
         self.navigationItem.title = "Profile"
-        versionValue.text = Bundle.main.releaseVersionNumber
+        self.userIdValue.text = userData?.userName ?? ""
+        versionValue.text = (Bundle.main.releaseVersionNumber ?? "")
+        buildNumberValueLabel.text = (Bundle.main.buildVersionNumber ?? "")
     }
     @IBAction func logoutButtonTapped(_ sender: Any) {
         logout() { result in

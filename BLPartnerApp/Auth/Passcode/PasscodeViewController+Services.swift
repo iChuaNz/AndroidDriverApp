@@ -8,8 +8,8 @@
 import Foundation
 
 extension PasscodeViewController {
-    func postLogin(username: String, passcode: String, completion: @escaping (Result<String, Error>) -> Void) {
-        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/user/login") else {
+    func postLogin(username: String, passcode: String, completion: @escaping (Result<ResponseLogin, Error>) -> Void) {
+        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/user/loginV2") else {
             DispatchQueue.main.async {
                 completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
             }
@@ -21,9 +21,7 @@ extension PasscodeViewController {
         
         
         let parameters: [String: Any] = [
-            "username": username,
-            "password": passcode,
-            "deviceToken": UserDefaults.standard.string(forKey: "FCMToken") ?? ""
+            "phoneNumber": username,
         ]
         
         request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
@@ -51,15 +49,23 @@ extension PasscodeViewController {
                 return
             }
             
-            if let data = data, let responseString = String(data: data, encoding: .utf8) {
-                DispatchQueue.main.async {
-                    BasicAlert.shared.dismiss()
-                    completion(.success(responseString))
+            if let data = data {
+                do {
+                    let decoder = JSONDecoder()
+                    let responseModel = try decoder.decode(ResponseLogin.self, from: data)
+                    DispatchQueue.main.async {
+                        BasicAlert.shared.dismiss()
+                        completion(.success(responseModel))
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        BasicAlert.shared.dismiss()
+                        completion(.failure(error))
+                    }
                 }
             } else {
                 let parseError = NSError(domain: "DataParseError", code: 0, userInfo: nil)
                 DispatchQueue.main.async {
-                    BasicAlert.shared.dismiss()
                     completion(.failure(parseError))
                 }
             }
