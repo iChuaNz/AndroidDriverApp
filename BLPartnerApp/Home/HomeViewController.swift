@@ -18,7 +18,15 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
     @IBOutlet weak var containerRouteCode: UIView!
     @IBOutlet weak var endTripLabel: UILabel!
     @IBOutlet weak var markerImageView: UIImageView!
+    @IBOutlet weak var containerScheduledView: UIView!
+    @IBOutlet weak var destinationTitleTripLabel: UILabel!
+    @IBOutlet weak var goTime: UILabel!
+    @IBOutlet weak var startPoinnt: UILabel!
+    @IBOutlet weak var endPoint: UILabel!
+    @IBOutlet weak var finishButton: UIButton!
     var userData: UserData?
+    var allTrips: [[AllTripsData]]?
+    @IBOutlet weak var calendarImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,23 +34,30 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
             switch result {
             case .success(let responseModel):
                 if responseModel.success, let data = responseModel.data {
+                    self.allTrips = data
                     print("success post all job")
                 } else {
-                    print("success post all job")
+                    print("failed post all job")
                 }
             case .failure(let error):
-                print("success post all job")
+                print("failed post all job")
             }
         }
         setupMaps()
-        setupScheduledView()
+        containerScheduledView.layer.cornerRadius = 16
+        containerScheduledView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // Top left and top right corners only
+        containerScheduledView.clipsToBounds = true
+    }
+    
+    func setupUI() {
+       
     }
     
     func setupScheduledView() {
         let scheduledVC = ScheduledViewController()
-        scheduledVC.modalPresentationStyle = .formSheet
+        scheduledVC.modalPresentationStyle = .fullScreen
         scheduledVC.transitioningDelegate = self
-        present(scheduledVC, animated: true, completion: nil)
+        present(scheduledVC, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -72,8 +87,8 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
         vc.userData = userData
         navigationController?.pushViewController(vc, animated: false)
     }
-    func postAll(completion: @escaping (Result<ResponseJobs, Error>) -> Void) {
-        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/Jobs") else {
+    func postAll(completion: @escaping (Result<ResponseAllTrips, Error>) -> Void) {
+        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/Jobs/AllTrips") else {
             DispatchQueue.main.async {
                 completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
             }
@@ -83,14 +98,7 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue(userData?.token ?? "", forHTTPHeaderField: "token")
-//        [request setValue:token forHTTPHeaderField:@"token"];
-        
-        
-//        let parameters: [String: Any] = [
-//            "token": userData?.token ?? "",
-//        ]
-        
-//        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+
         
         // Create a URLSession
         let session = URLSession.shared
@@ -101,7 +109,6 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
             if let error = error {
                 DispatchQueue.main.async {
                     BasicAlert.shared.dismiss()
-                    self.showAlert(title: "Invalid", message: "Authentication Invalid")
                     completion(.failure(error))
                 }
                 return
@@ -111,7 +118,6 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
                 let responseError = NSError(domain: "InvalidResponse", code: 0, userInfo: nil)
                 DispatchQueue.main.async {
                     BasicAlert.shared.dismiss()
-                    self.showAlert(title: "Invalid", message: "Authentication Invalid")
                     completion(.failure(responseError))
                 }
                 return
@@ -120,7 +126,7 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
             if let data = data {
                 do {
                     let decoder = JSONDecoder()
-                    let responseModel = try decoder.decode(ResponseJobs.self, from: data)
+                    let responseModel = try decoder.decode(ResponseAllTrips.self, from: data)
                     DispatchQueue.main.async {
                         BasicAlert.shared.dismiss()
                         completion(.success(responseModel))
@@ -128,7 +134,6 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
                 } catch {
                     DispatchQueue.main.async {
                         BasicAlert.shared.dismiss()
-                        self.showAlert(title: "Invalid", message: "Authentication Invalid")
                         completion(.failure(error))
                     }
                 }
@@ -136,7 +141,6 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
                 let parseError = NSError(domain: "DataParseError", code: 0, userInfo: nil)
                 DispatchQueue.main.async {
                     BasicAlert.shared.dismiss()
-                    self.showAlert(title: "Invalid", message: "Authentication Invalid")
                     completion(.failure(parseError))
                 }
             }
@@ -150,4 +154,5 @@ extension HomeViewController: GMSMapViewDelegate {
         let camera = GMSCameraPosition.camera(withLatitude: 1.287953, longitude: 103.851784, zoom: 17.0)
         mapView.camera = camera
     }
+
 }

@@ -20,8 +20,7 @@ class ScheduledViewController: UIViewController {
     func setupTableView() {
         self.scheduledTableView.dataSource = self
         self.scheduledTableView.delegate = self
-        
-        self.scheduledTableView.register(ScheduledViewCell.self, forCellReuseIdentifier: "ScheduledViewCell")
+        self.scheduledTableView.register(UINib(nibName: "ScheduledViewCell", bundle: nil), forCellReuseIdentifier: "ScheduledViewCell")
     }
     
 }

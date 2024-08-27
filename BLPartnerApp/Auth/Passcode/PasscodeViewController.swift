@@ -20,8 +20,10 @@ class PasscodeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Verification Code"
+        self.navigationController?.navigationBar.barTintColor = .white
+        self.navigationController?.navigationBar.tintColor = .white
         submitPasscodeButton.isEnabled = false
-        
+        self.passcodeTF.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         passcodeTF.delegate = self
     }
     
@@ -57,10 +59,18 @@ class PasscodeViewController: UIViewController {
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+           // Enable or disable button based on whether the text field is empty
+           if let text = textField.text, !text.isEmpty {
+               submitPasscodeButton.isEnabled = true
+           } else {
+               submitPasscodeButton.isEnabled = false
+           }
+       }
 }
 
 extension PasscodeViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        submitPasscodeButton.isEnabled = true
-    }
+//    func textFieldDidBeginEditing(_ textField: UITextField) {
+//        submitPasscodeButton.isEnabled = true
+//    }
 }

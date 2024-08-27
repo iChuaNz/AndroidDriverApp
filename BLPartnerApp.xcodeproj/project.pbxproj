@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7C2580EC35732A0132FAAF29 /* Pods_BLPartnerApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FC468758F7EB6416433C3A /* Pods_BLPartnerApp.framework */; };
 		7F0805892C5BA45F00F99C30 /* AlertBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0805882C5BA45F00F99C30 /* AlertBasic.swift */; };
+		7F96C72F2C7C7B3400D1C1FC /* ResponseAllTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F96C72E2C7C7B3400D1C1FC /* ResponseAllTrips.swift */; };
 		7F9EF60A2C4FB2F600A6C1C6 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F9EF6092C4FB2F600A6C1C6 /* SettingViewController.xib */; };
 		7F9EF60B2C4FB2F600A6C1C6 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EF6082C4FB2F600A6C1C6 /* SettingViewController.swift */; };
 		7F9EF60E2C4FB92E00A6C1C6 /* Extension+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EF60D2C4FB92E00A6C1C6 /* Extension+Bundle.swift */; };
@@ -67,6 +68,7 @@
 		478B23D583DF7B0531DD3354 /* Pods-BLPartnerAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLPartnerAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BLPartnerAppTests/Pods-BLPartnerAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		54416E338CCC5ED772945419 /* Pods-BLPartnerApp-BLPartnerAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLPartnerApp-BLPartnerAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-BLPartnerApp-BLPartnerAppUITests/Pods-BLPartnerApp-BLPartnerAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F0805882C5BA45F00F99C30 /* AlertBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBasic.swift; sourceTree = "<group>"; };
+		7F96C72E2C7C7B3400D1C1FC /* ResponseAllTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseAllTrips.swift; sourceTree = "<group>"; };
 		7F9EF6082C4FB2F600A6C1C6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		7F9EF6092C4FB2F600A6C1C6 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		7F9EF60D2C4FB92E00A6C1C6 /* Extension+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Bundle.swift"; sourceTree = "<group>"; };
@@ -94,7 +96,7 @@
 		7FBE53E02C4A869F00C1F5AF /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		7FBE53E32C4A88CB00C1F5AF /* PasscodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasscodeViewController.swift; sourceTree = "<group>"; };
 		7FBE53E42C4A88CB00C1F5AF /* PasscodeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasscodeViewController.xib; sourceTree = "<group>"; };
-		7FBE53E72C4A8F8B00C1F5AF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		7FBE53E72C4A8F8B00C1F5AF /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; tabWidth = 3; };
 		7FBE53E82C4A8F8B00C1F5AF /* HomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		7FC17AF52C6E14010008F6FA /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7FC17AF72C6EA0710008F6FA /* ResponseJobs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseJobs.swift; sourceTree = "<group>"; };
@@ -200,6 +202,7 @@
 			children = (
 				7FA0D2A92C5CFA7300259DBD /* ResponseLogin.swift */,
 				7FC17AF72C6EA0710008F6FA /* ResponseJobs.swift */,
+				7F96C72E2C7C7B3400D1C1FC /* ResponseAllTrips.swift */,
 			);
 			path = ModelResponse;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				7FAEA6812C53403C0093FBC0 /* PasscodeViewController+Services.swift in Sources */,
 				7FBE53E22C4A869F00C1F5AF /* LoginViewController.swift in Sources */,
 				7FA0D2A72C5BA5CF00259DBD /* BasicUIState.swift in Sources */,
+				7F96C72F2C7C7B3400D1C1FC /* ResponseAllTrips.swift in Sources */,
 				7FC17B012C6EA97F0008F6FA /* ScheduledViewController.swift in Sources */,
 				7FAA3D3D2C462E9E00A2FD88 /* AppDelegate.swift in Sources */,
 				7FAA3D3F2C462E9E00A2FD88 /* SceneDelegate.swift in Sources */,
@@ -794,7 +798,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = BLPartnerApp/BLPartnerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20240805001;
+				CURRENT_PROJECT_VERSION = 20240827001;
 				DEVELOPMENT_TEAM = 86R52TH368;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BLPartnerApp/Info.plist;
@@ -829,7 +833,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = BLPartnerApp/BLPartnerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20240805001;
+				CURRENT_PROJECT_VERSION = 20240827001;
 				DEVELOPMENT_TEAM = 86R52TH368;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BLPartnerApp/Info.plist;

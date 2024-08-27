@@ -29,21 +29,21 @@
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
                     <subviews>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Enter your phone number here" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FZy-x7-XID">
-                            <rect key="frame" x="30" y="121.33333333333334" width="333" height="60"/>
+                            <rect key="frame" x="88" y="157" width="285" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="2dN-g0-ESX"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
                             <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
                         </textField>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Login With your Phone Number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LY9-KX-axP">
-                            <rect key="frame" x="50.666666666666657" y="80.333333333333343" width="292" height="21"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please Login With your Phone Number" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LY9-KX-axP">
+                            <rect key="frame" x="20" y="85.666666666666657" width="353" height="51.333333333333343"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ld0-EU-vUU">
-                            <rect key="frame" x="30" y="201.33333333333331" width="333" height="60"/>
+                            <rect key="frame" x="30" y="237" width="333" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="QzH-GY-S8C"/>
                             </constraints>
@@ -58,22 +58,34 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Welcome to Buslink" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ybj-Of-KVa">
-                            <rect key="frame" x="122.00000000000001" y="40" width="149.33333333333337" height="20.333333333333329"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <rect key="frame" x="99.333333333333329" y="40" width="194.66666666666669" height="25.666666666666671"/>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="+65" borderStyle="roundedRect" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UAV-a0-gup">
+                            <rect key="frame" x="20" y="159" width="60" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="HAL-XT-kym"/>
+                                <constraint firstAttribute="height" constant="60" id="g22-uk-5PE"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="20"/>
+                            <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                        </textField>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="FZy-x7-XID" secondAttribute="trailing" constant="30" id="7Rk-dH-26d"/>
+                        <constraint firstItem="ld0-EU-vUU" firstAttribute="top" secondItem="UAV-a0-gup" secondAttribute="bottom" constant="18" id="6f0-5H-Nx7"/>
                         <constraint firstAttribute="trailing" secondItem="ld0-EU-vUU" secondAttribute="trailing" constant="30" id="Cby-6Y-ctX"/>
                         <constraint firstItem="ybj-Of-KVa" firstAttribute="centerX" secondItem="AZ7-ZC-PUe" secondAttribute="centerX" id="Gdp-x4-H4x"/>
+                        <constraint firstAttribute="trailing" secondItem="FZy-x7-XID" secondAttribute="trailing" constant="20" id="N6A-Rn-SBI"/>
+                        <constraint firstItem="LY9-KX-axP" firstAttribute="leading" secondItem="AZ7-ZC-PUe" secondAttribute="leading" constant="20" id="R0R-qf-1ew"/>
+                        <constraint firstItem="UAV-a0-gup" firstAttribute="leading" secondItem="AZ7-ZC-PUe" secondAttribute="leading" constant="20" id="UAR-Qw-wBf"/>
                         <constraint firstItem="ld0-EU-vUU" firstAttribute="centerX" secondItem="AZ7-ZC-PUe" secondAttribute="centerX" id="aBv-sw-O3d"/>
                         <constraint firstItem="LY9-KX-axP" firstAttribute="centerX" secondItem="AZ7-ZC-PUe" secondAttribute="centerX" id="fS9-pa-kqF"/>
+                        <constraint firstItem="FZy-x7-XID" firstAttribute="leading" secondItem="UAV-a0-gup" secondAttribute="trailing" constant="8" id="ffC-BJ-Ro3"/>
                         <constraint firstItem="LY9-KX-axP" firstAttribute="top" secondItem="ybj-Of-KVa" secondAttribute="bottom" constant="20" id="kwY-bs-93Z"/>
                         <constraint firstItem="ld0-EU-vUU" firstAttribute="top" secondItem="FZy-x7-XID" secondAttribute="bottom" constant="20" id="oWe-2m-qK4"/>
-                        <constraint firstItem="FZy-x7-XID" firstAttribute="centerX" secondItem="AZ7-ZC-PUe" secondAttribute="centerX" id="oXw-vR-5Fh"/>
                         <constraint firstItem="FZy-x7-XID" firstAttribute="top" secondItem="LY9-KX-axP" secondAttribute="bottom" constant="20" id="qwM-YE-Aj6"/>
                         <constraint firstItem="ybj-Of-KVa" firstAttribute="top" secondItem="AZ7-ZC-PUe" secondAttribute="top" constant="40" id="reS-es-u4k"/>
                     </constraints>
