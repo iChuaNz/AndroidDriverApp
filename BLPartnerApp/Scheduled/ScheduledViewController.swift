@@ -15,6 +15,8 @@ class ScheduledViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        segmentedDay.setTitle("Today", forSegmentAt: 0)
+        segmentedDay.setTitle("Tomorrow", forSegmentAt: 1)
     }
     
     func setupTableView() {

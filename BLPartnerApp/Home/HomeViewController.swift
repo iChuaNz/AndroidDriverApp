@@ -35,7 +35,28 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
             case .success(let responseModel):
                 if responseModel.success, let data = responseModel.data {
                     self.allTrips = data
-                    print("success post all job")
+                    if let allTripsDataArray = self.allTrips, !allTripsDataArray.isEmpty {
+                        if let firstTripData = allTripsDataArray.first, !firstTripData.isEmpty {
+                            let codeName = firstTripData[0].codeName
+                            self.destinationTitleTripLabel.text = codeName
+                            let firstPoints = firstTripData[0].points
+                            if !firstPoints.isEmpty {
+                                let firstPointName = firstPoints[0].pointName.replacingOccurrences(of: "Bus Stop opp", with: "")
+                                let endPointName = firstPoints[1].pointName.replacingOccurrences(of: "Bus stop opp", with: "")
+                                self.startPoinnt.text = firstPointName
+                                self.endPoint.text = endPointName
+                                print("First Point Name: \(firstPointName)")
+                                // You can now use `firstPointName` as needed
+                            } else {
+                                print("No points found in the first trip data.")
+                            }
+                        } else {
+                            print("First trip data is empty.")
+                        }
+                    } else {
+                        print("All trips data is empty.")
+                    }
+                    print(">>>>> data", data)
                 } else {
                     print("failed post all job")
                 }
@@ -43,6 +64,7 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
                 print("failed post all job")
             }
         }
+        setupUI()
         setupMaps()
         containerScheduledView.layer.cornerRadius = 16
         containerScheduledView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // Top left and top right corners only
@@ -50,12 +72,18 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
     }
     
     func setupUI() {
-       
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        calendarImage.isUserInteractionEnabled = true
+        calendarImage.addGestureRecognizer(tapGestureRecognizer)
     }
     
-    func setupScheduledView() {
+    @objc func imageTapped() {
+        routeToScheduled()
+    }
+    
+    func routeToScheduled() {
         let scheduledVC = ScheduledViewController()
-        scheduledVC.modalPresentationStyle = .fullScreen
+        scheduledVC.modalPresentationStyle = .pageSheet
         scheduledVC.transitioningDelegate = self
         present(scheduledVC, animated: false)
     }
