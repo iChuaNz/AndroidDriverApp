@@ -10,7 +10,7 @@ import Foundation
 // MARK: - ResponseJobs
 struct ResponseJobs: Codable {
     let success: Bool
-    let data: JobsData?
+    let data: [JobsData]?
     let error: JSONNull?
 }
 
@@ -19,11 +19,11 @@ struct JobsData: Codable {
     let totalBoarded: Int
     let points: [Point]
     let routeID: Int
-    let vehicleNo: JSONNull?
+    let vehicleNo: String?
     let message: String
     let schoolBus, externalNFC: Bool
     let passengers: [Passenger]
-    let path: [Path]
+    let path: [Path] = []
     let internalNFC: Bool
     let codeName: String
     let totalAligned: Int
@@ -46,7 +46,7 @@ struct JobsData: Codable {
 struct Passenger: Codable {
     let gender, picURL: String
     let smsNOK: Bool
-    let ezlinkCanID, bordedOrAligned: JSONNull?
+    let ezlinkCanID, bordedOrAligned: String?
     let nokName, nokContact, name, nokRelationship: String
 
     enum CodingKeys: String, CodingKey {

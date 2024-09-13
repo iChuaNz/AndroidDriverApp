@@ -9,7 +9,14 @@
 /* Begin PBXBuildFile section */
 		7C2580EC35732A0132FAAF29 /* Pods_BLPartnerApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 44FC468758F7EB6416433C3A /* Pods_BLPartnerApp.framework */; };
 		7F0805892C5BA45F00F99C30 /* AlertBasic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F0805882C5BA45F00F99C30 /* AlertBasic.swift */; };
+		7F18AC542C8FEE75009D74AC /* CustomMarkerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F18AC532C8FEE75009D74AC /* CustomMarkerView.swift */; };
+		7F18AC572C900E35009D74AC /* PulseAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F18AC562C900E35009D74AC /* PulseAnimationView.swift */; };
+		7F18AC592C901AA1009D74AC /* RadialAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F18AC582C901AA1009D74AC /* RadialAnimationView.swift */; };
+		7F18AC5B2C901C38009D74AC /* PulsingRadialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F18AC5A2C901C38009D74AC /* PulsingRadialView.swift */; };
+		7F4915732C8845230005E791 /* BasicModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4915712C8845230005E791 /* BasicModalViewController.swift */; };
+		7F4915742C8845230005E791 /* BasicModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F4915722C8845230005E791 /* BasicModalViewController.xib */; };
 		7F96C72F2C7C7B3400D1C1FC /* ResponseAllTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F96C72E2C7C7B3400D1C1FC /* ResponseAllTrips.swift */; };
+		7F9AEBF32C8507FB002C2AB3 /* HomeViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9AEBF22C8507FB002C2AB3 /* HomeViewController+Extension.swift */; };
 		7F9EF60A2C4FB2F600A6C1C6 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F9EF6092C4FB2F600A6C1C6 /* SettingViewController.xib */; };
 		7F9EF60B2C4FB2F600A6C1C6 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EF6082C4FB2F600A6C1C6 /* SettingViewController.swift */; };
 		7F9EF60E2C4FB92E00A6C1C6 /* Extension+Bundle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9EF60D2C4FB92E00A6C1C6 /* Extension+Bundle.swift */; };
@@ -41,6 +48,8 @@
 		7FC17B012C6EA97F0008F6FA /* ScheduledViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC17AFF2C6EA97E0008F6FA /* ScheduledViewController.swift */; };
 		7FC17B022C6EA97F0008F6FA /* ScheduledViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7FC17B002C6EA97E0008F6FA /* ScheduledViewController.xib */; };
 		7FC17B042C6EB06F0008F6FA /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC17B032C6EB06F0008F6FA /* UIColor+Extension.swift */; };
+		7FF8E6D32C81AAB900A1D9C5 /* ResponseTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF8E6D22C81AAB900A1D9C5 /* ResponseTrips.swift */; };
+		7FF8E6D52C8324C500A1D9C5 /* ScheduledVC+Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF8E6D42C8324C500A1D9C5 /* ScheduledVC+Services.swift */; };
 		A598E11338AE6B3C5D2C9131 /* Pods_BLPartnerApp_BLPartnerAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BF4D34642CFAEF000534D773 /* Pods_BLPartnerApp_BLPartnerAppUITests.framework */; };
 		CFEC31B5178A7DE257446822 /* Pods_BLPartnerAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D38FEEF779D8CEE3AFD19060 /* Pods_BLPartnerAppTests.framework */; };
 /* End PBXBuildFile section */
@@ -68,7 +77,15 @@
 		478B23D583DF7B0531DD3354 /* Pods-BLPartnerAppTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLPartnerAppTests.debug.xcconfig"; path = "Target Support Files/Pods-BLPartnerAppTests/Pods-BLPartnerAppTests.debug.xcconfig"; sourceTree = "<group>"; };
 		54416E338CCC5ED772945419 /* Pods-BLPartnerApp-BLPartnerAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLPartnerApp-BLPartnerAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-BLPartnerApp-BLPartnerAppUITests/Pods-BLPartnerApp-BLPartnerAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7F0805882C5BA45F00F99C30 /* AlertBasic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertBasic.swift; sourceTree = "<group>"; };
+		7F18AC532C8FEE75009D74AC /* CustomMarkerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMarkerView.swift; sourceTree = "<group>"; };
+		7F18AC552C8FF768009D74AC /* Directions.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = Directions.geojson; sourceTree = "<group>"; };
+		7F18AC562C900E35009D74AC /* PulseAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulseAnimationView.swift; sourceTree = "<group>"; };
+		7F18AC582C901AA1009D74AC /* RadialAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadialAnimationView.swift; sourceTree = "<group>"; };
+		7F18AC5A2C901C38009D74AC /* PulsingRadialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsingRadialView.swift; sourceTree = "<group>"; };
+		7F4915712C8845230005E791 /* BasicModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicModalViewController.swift; sourceTree = "<group>"; };
+		7F4915722C8845230005E791 /* BasicModalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicModalViewController.xib; sourceTree = "<group>"; };
 		7F96C72E2C7C7B3400D1C1FC /* ResponseAllTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseAllTrips.swift; sourceTree = "<group>"; };
+		7F9AEBF22C8507FB002C2AB3 /* HomeViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Extension.swift"; sourceTree = "<group>"; };
 		7F9EF6082C4FB2F600A6C1C6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		7F9EF6092C4FB2F600A6C1C6 /* SettingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingViewController.xib; sourceTree = "<group>"; };
 		7F9EF60D2C4FB92E00A6C1C6 /* Extension+Bundle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+Bundle.swift"; sourceTree = "<group>"; };
@@ -105,6 +122,8 @@
 		7FC17AFF2C6EA97E0008F6FA /* ScheduledViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduledViewController.swift; sourceTree = "<group>"; };
 		7FC17B002C6EA97E0008F6FA /* ScheduledViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduledViewController.xib; sourceTree = "<group>"; };
 		7FC17B032C6EB06F0008F6FA /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		7FF8E6D22C81AAB900A1D9C5 /* ResponseTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseTrips.swift; sourceTree = "<group>"; };
+		7FF8E6D42C8324C500A1D9C5 /* ScheduledVC+Services.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScheduledVC+Services.swift"; sourceTree = "<group>"; };
 		AB5443CFC60F0B633E5952DD /* Pods-BLPartnerApp-BLPartnerAppUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLPartnerApp-BLPartnerAppUITests.release.xcconfig"; path = "Target Support Files/Pods-BLPartnerApp-BLPartnerAppUITests/Pods-BLPartnerApp-BLPartnerAppUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B4C264CFAC363CAEAC42831B /* Pods-BLPartnerApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BLPartnerApp.release.xcconfig"; path = "Target Support Files/Pods-BLPartnerApp/Pods-BLPartnerApp.release.xcconfig"; sourceTree = "<group>"; };
 		BF4D34642CFAEF000534D773 /* Pods_BLPartnerApp_BLPartnerAppUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BLPartnerApp_BLPartnerAppUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -174,6 +193,8 @@
 			children = (
 				7FBE53E72C4A8F8B00C1F5AF /* HomeViewController.swift */,
 				7FBE53E82C4A8F8B00C1F5AF /* HomeViewController.xib */,
+				7F9AEBF22C8507FB002C2AB3 /* HomeViewController+Extension.swift */,
+				7F18AC552C8FF768009D74AC /* Directions.geojson */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -203,6 +224,7 @@
 				7FA0D2A92C5CFA7300259DBD /* ResponseLogin.swift */,
 				7FC17AF72C6EA0710008F6FA /* ResponseJobs.swift */,
 				7F96C72E2C7C7B3400D1C1FC /* ResponseAllTrips.swift */,
+				7FF8E6D22C81AAB900A1D9C5 /* ResponseTrips.swift */,
 			);
 			path = ModelResponse;
 			sourceTree = "<group>";
@@ -285,6 +307,12 @@
 			children = (
 				7FC17AFA2C6EA36D0008F6FA /* ScheduledViewCell.swift */,
 				7FC17AFB2C6EA36D0008F6FA /* ScheduledViewCell.xib */,
+				7F4915712C8845230005E791 /* BasicModalViewController.swift */,
+				7F4915722C8845230005E791 /* BasicModalViewController.xib */,
+				7F18AC532C8FEE75009D74AC /* CustomMarkerView.swift */,
+				7F18AC562C900E35009D74AC /* PulseAnimationView.swift */,
+				7F18AC582C901AA1009D74AC /* RadialAnimationView.swift */,
+				7F18AC5A2C901C38009D74AC /* PulsingRadialView.swift */,
 			);
 			path = Componennt;
 			sourceTree = "<group>";
@@ -294,6 +322,7 @@
 			children = (
 				7FC17AFF2C6EA97E0008F6FA /* ScheduledViewController.swift */,
 				7FC17B002C6EA97E0008F6FA /* ScheduledViewController.xib */,
+				7FF8E6D42C8324C500A1D9C5 /* ScheduledVC+Services.swift */,
 			);
 			path = Scheduled;
 			sourceTree = "<group>";
@@ -435,6 +464,7 @@
 				7FBE53E52C4A88CB00C1F5AF /* PasscodeViewController.xib in Resources */,
 				7F9EF60A2C4FB2F600A6C1C6 /* SettingViewController.xib in Resources */,
 				7FC17AFD2C6EA36E0008F6FA /* ScheduledViewCell.xib in Resources */,
+				7F4915742C8845230005E791 /* BasicModalViewController.xib in Resources */,
 				7FAA3D462C462EA200A2FD88 /* Assets.xcassets in Resources */,
 				7FBE53E92C4A8F8B00C1F5AF /* HomeViewController.xib in Resources */,
 				7FAA3D492C462EA200A2FD88 /* Base in Resources */,
@@ -602,6 +632,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F18AC592C901AA1009D74AC /* RadialAnimationView.swift in Sources */,
+				7F18AC572C900E35009D74AC /* PulseAnimationView.swift in Sources */,
 				7FBE53EA2C4A8F8B00C1F5AF /* HomeViewController.swift in Sources */,
 				7FC17AF82C6EA0710008F6FA /* ResponseJobs.swift in Sources */,
 				7F9EF6182C510F3500A6C1C6 /* extension+URL.swift in Sources */,
@@ -609,7 +641,10 @@
 				7FC17AFC2C6EA36D0008F6FA /* ScheduledViewCell.swift in Sources */,
 				7FBE53E62C4A88CB00C1F5AF /* PasscodeViewController.swift in Sources */,
 				7F9EF6162C510EF400A6C1C6 /* EndPoint.swift in Sources */,
+				7F4915732C8845230005E791 /* BasicModalViewController.swift in Sources */,
+				7FF8E6D32C81AAB900A1D9C5 /* ResponseTrips.swift in Sources */,
 				7FA0D2AA2C5CFA7300259DBD /* ResponseLogin.swift in Sources */,
+				7F18AC5B2C901C38009D74AC /* PulsingRadialView.swift in Sources */,
 				7FC17AF62C6E14010008F6FA /* BaseViewController.swift in Sources */,
 				7FAEA6812C53403C0093FBC0 /* PasscodeViewController+Services.swift in Sources */,
 				7FBE53E22C4A869F00C1F5AF /* LoginViewController.swift in Sources */,
@@ -618,9 +653,12 @@
 				7FC17B012C6EA97F0008F6FA /* ScheduledViewController.swift in Sources */,
 				7FAA3D3D2C462E9E00A2FD88 /* AppDelegate.swift in Sources */,
 				7FAA3D3F2C462E9E00A2FD88 /* SceneDelegate.swift in Sources */,
+				7F9AEBF32C8507FB002C2AB3 /* HomeViewController+Extension.swift in Sources */,
 				7F9EF60B2C4FB2F600A6C1C6 /* SettingViewController.swift in Sources */,
 				7F9EF6122C510E8700A6C1C6 /* API.swift in Sources */,
 				7F9EF6142C510EBA00A6C1C6 /* Services.swift in Sources */,
+				7FF8E6D52C8324C500A1D9C5 /* ScheduledVC+Services.swift in Sources */,
+				7F18AC542C8FEE75009D74AC /* CustomMarkerView.swift in Sources */,
 				7F9EF60E2C4FB92E00A6C1C6 /* Extension+Bundle.swift in Sources */,
 				7FC17B042C6EB06F0008F6FA /* UIColor+Extension.swift in Sources */,
 			);
@@ -798,7 +836,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = BLPartnerApp/BLPartnerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20240829001;
+				CURRENT_PROJECT_VERSION = 20240913001;
 				DEVELOPMENT_TEAM = 86R52TH368;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BLPartnerApp/Info.plist;
@@ -833,7 +871,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = BLPartnerApp/BLPartnerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20240829001;
+				CURRENT_PROJECT_VERSION = 20240913001;
 				DEVELOPMENT_TEAM = 86R52TH368;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BLPartnerApp/Info.plist;

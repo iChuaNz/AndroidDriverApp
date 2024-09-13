@@ -16,16 +16,17 @@ struct ResponseAllTrips: Codable {
 // MARK: - Datum
 struct AllTripsData: Codable {
     let totalBoarded: Int
-    let points: [Point]
+    let points: [Point]?
     let routeID: Int
     let vehicleNo: String?
     let message: String
     let schoolBus, externalNFC: Bool
-    let passengers, path: [JSONAny]
+    let passengers: [Passenger]?
+    let path: [Path]?
     let internalNFC: Bool
-    let codeName: String
+    let codeName: String?
     let totalAligned: Int
-    let adhoc: Adhoc
+    let adhoc: Adhoc?
     let totalPassenger: Int
     let fourDigitCode, serviceName: String
 

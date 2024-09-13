@@ -8,7 +8,7 @@
 import UIKit
 
 
-class LoginViewController: UIViewController {
+class LoginViewController: BaseViewController {
     @IBOutlet weak var phoneNumberTF: UITextField!
     @IBOutlet weak var submitButton: UIButton!
     
@@ -29,7 +29,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func submitButtonTapped(_ sender: Any) {
-        routeToPasscode()
+        validateTextFieldInput()
     }
     
     func routeToPasscode() {
@@ -46,6 +46,26 @@ class LoginViewController: UIViewController {
                submitButton.isEnabled = false
            }
        }
+    
+    private func validateTextFieldInput() {
+           guard let text = phoneNumberTF.text else {
+               return
+           }
+
+        if phoneNumberTF.text?.isEmpty == true {
+           } else if !isNumericWithoutSpaces(text: text) {
+              showBasicModal(title: "Error!", message: "Please enter a valid number")
+               return
+           } else {
+               routeToPasscode()
+           }
+       }
+    
+    private func isNumericWithoutSpaces(text: String) -> Bool {
+          let regex = "^[0-9]+$"
+          let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
+          return predicate.evaluate(with: text)
+      }
 }
 
 extension LoginViewController: UITextFieldDelegate {

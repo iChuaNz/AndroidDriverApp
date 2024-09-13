@@ -41,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Wormholy.shakeEnabled = true
         setupGoogleMapsAPI()
+
         return true
     }
     

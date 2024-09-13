@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PasscodeViewController: UIViewController {
+class PasscodeViewController: BaseViewController {
     
     @IBOutlet weak var welcomeTitle: UILabel!
     @IBOutlet weak var passcodeTF: UITextField!
@@ -27,27 +27,29 @@ class PasscodeViewController: UIViewController {
         passcodeTF.delegate = self
     }
     
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        self.present(alertController, animated: true, completion: nil)
-    }
-    
     @IBAction func submitPasscodeTapped(_ sender: Any) {
+        guard let text = passcodeTF.text else {
+            return
+        }
+        if text.count != 6 {
+            showBasicModal(title: "Error!", message: "Invalid 6 digit code entered")
+            return
+        }
         DispatchQueue.main.async {
-            self.postLogin(username: self.phoneNumber, passcode: self.passcodeTF.text ?? "") { result in
+            self.postLogin(username: self.phoneNumber, passcode: self.passcodeTF.text ?? "") { [weak self] result in
                 switch result {
                 case .success(let responseModel):
                     if responseModel.success, let data = responseModel.data {
-                        self.userData = data
+                        self?.userData = data
                         // Reload the table view or perform any necessary actions with the user data
-                        self.routeToHome(userData: data)
+                        self?.routeToHome(userData: data)
+                        UserDefaults.standard.set(data.token, forKey: "token")
                         print("User Data: \(data)")
                     } else {
-                        print("Error: \(responseModel.error ?? "Unknown error")")
+                        self?.showBasicModal(title: "Error!", message: "Failed fetch data")
                     }
                 case .failure(let error):
-                    print("Failed to fetch data: \(error.localizedDescription)")
+                    self?.showBasicModal(title: "Error!", message: "Something wrong \(error.localizedDescription)")
                 }
             }
         }
