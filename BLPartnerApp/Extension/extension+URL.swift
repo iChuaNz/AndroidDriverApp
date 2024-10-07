@@ -12,7 +12,7 @@ extension URL {
         #if DEBUG
         URL(string: "https://bustrackerstaging.azurewebsites.net/\(endpoint)")!
         #else
-        URL(string: "https://bustrackerstaging.azurewebsites.net/\(endpoint)")!
+        URL(string: "https://bustracker.azurewebsites.net/\(endpoint)")!
         #endif
     }
 }

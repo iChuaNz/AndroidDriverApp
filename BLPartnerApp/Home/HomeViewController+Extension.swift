@@ -6,10 +6,12 @@
 //
 
 import Foundation
+import GoogleMaps
+import GoogleUtilities
 
 extension HomeViewController {
     func postAll(completion: @escaping (Result<ResponseTrips, Error>) -> Void) {
-        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/Jobs/Trips") else {
+        guard let url = URL(string: "https://bustracker.azurewebsites.net/api/2/Jobs/Trips") else {
             DispatchQueue.main.async {
                 completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
             }
@@ -69,8 +71,8 @@ extension HomeViewController {
         task.resume()
     }
     
-    func endTrips(accessCode: String, completion: @escaping (Result<ResponseLogin, Error>) -> Void) {
-        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/Jobs/EndRouteTrip/") else {
+    func endTrips(accessCode: Int, completion: @escaping (Result<ResponseLogin, Error>) -> Void) {
+        guard let url = URL(string: "https://bustracker.azurewebsites.net/api/2/Jobs/EndTripRoute") else {
             DispatchQueue.main.async {
                 completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
             }
@@ -79,14 +81,17 @@ extension HomeViewController {
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue(userData?.token ?? "", forHTTPHeaderField: "token")
         
-        let parameters: [String: Any] = [
-            "BusCharterId": accessCode,
+        let body: [String: Any] = [
+            "data": [
+                "BusCharterId": accessCode
+            ]
         ]
-        
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+            
+        guard let httpBody = try? JSONSerialization.data(withJSONObject: body, options: []) else { return }
+        request.httpBody = httpBody
     
-        // Create a URLSession
         let session = URLSession.shared
         BasicAlert.shared.showLoading(self.view)
         // Create the data task
@@ -132,5 +137,77 @@ extension HomeViewController {
             }
         }
         task.resume()
+    }
+}
+
+
+extension HomeViewController: ScheduledViewControllerProtocol {
+    func didDismissWithObject(isCurrentTrip: Bool, trip: AllTripsData) {
+        self.isCurrenntTrip = isCurrentTrip
+        self.otherTripsData = trip
+        self.clearPathPoints()
+        if isCurrenntTrip == true {
+            self.postAll() { result in
+                switch result {
+                case .success(let responseModel):
+                    if responseModel.success == false {
+                        self.showBasicModal(title: "Info", message: "This job is already expired.")
+                    }
+                    if responseModel.success, let data = responseModel.data {
+                        self.tripsData = data
+                        self.setupUI()
+                    } else {
+                        print("All trips data is empty.")
+                    }
+                case .failure(let error):
+                    print("failed post all job")
+                }
+            }
+        }  else {
+            self.setupOtherTrip(otherTripsData: trip)
+        }
+    }
+    
+    func didDismissView() {
+        self.clearPathPoints()
+        if isCurrenntTrip == true {
+            self.postAll() { result in
+                switch result {
+                case .success(let responseModel):
+                    if responseModel.success == false {
+                        self.showBasicModal(title: "Info", message: "This job is already expired.")
+                    }
+                    if responseModel.success, let data = responseModel.data {
+                        self.tripsData = data
+                        self.setupUI()
+                    } else {
+                        print("All trips data is empty.")
+                    }
+                case .failure(let error):
+                    print("failed post all job")
+                }
+            }
+        } else {
+            self.setupOtherTrip(otherTripsData: otherTripsData)
+        }
+    }
+}
+
+extension HomeViewController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
+        let camera = GMSCameraPosition.camera(
+            withLatitude: position.target.latitude,
+            longitude: position.target.longitude,
+            zoom: position.zoom)
+        mapView.camera = camera
+        print(">>>> idle zoom : \(position.zoom)")
+    }
+    
+    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
+        print(">>>> did change zoom : \(position.zoom)")
+    }
+    
+    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
+        print(">>>> will move zoom : \(mapView.camera.zoom)")
     }
 }

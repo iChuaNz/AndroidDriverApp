@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
-        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScheduledViewController" customModule="BLPartnerApp" customModuleProvider="target">
             <connections>
                 <outlet property="containerScheduledView" destination="3wv-QO-5sp" id="jHW-OB-euY"/>
+                <outlet property="containerView" destination="Dle-UE-dct" id="fzl-wI-JuT"/>
                 <outlet property="scheduledTableView" destination="cwn-sT-YO5" id="agx-3v-F9Z"/>
                 <outlet property="segmentedDay" destination="dG0-6r-eiv" id="OzN-Qu-Tu3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,7 +22,11 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wv-QO-5sp">
+                <view alpha="0.14999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dle-UE-dct">
+                    <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3wv-QO-5sp">
                     <rect key="frame" x="0.0" y="459" width="393" height="393"/>
                     <subviews>
                         <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="dG0-6r-eiv">
@@ -32,7 +36,7 @@
                                 <segment title="Second"/>
                             </segments>
                         </segmentedControl>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cwn-sT-YO5">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cwn-sT-YO5">
                             <rect key="frame" x="0.0" y="70" width="373" height="323"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
@@ -48,12 +52,15 @@
                     </constraints>
                 </view>
             </subviews>
-            <viewLayoutGuide key="safeArea" id="bwf-qw-aOt"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="3wv-QO-5sp" secondAttribute="trailing" id="6uD-8v-eEh"/>
                 <constraint firstAttribute="bottom" secondItem="3wv-QO-5sp" secondAttribute="bottom" id="8xS-qa-Yf5"/>
-                <constraint firstItem="3wv-QO-5sp" firstAttribute="top" secondItem="bwf-qw-aOt" secondAttribute="top" constant="400" id="T7E-Jc-m8D"/>
+                <constraint firstItem="Dle-UE-dct" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="P9M-tW-M6A"/>
+                <constraint firstItem="3wv-QO-5sp" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="459" id="SIF-7d-WrS"/>
+                <constraint firstAttribute="trailing" secondItem="Dle-UE-dct" secondAttribute="trailing" id="WF4-4w-WkT"/>
+                <constraint firstItem="Dle-UE-dct" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gE0-v4-E3g"/>
+                <constraint firstAttribute="bottom" secondItem="Dle-UE-dct" secondAttribute="bottom" id="od5-Gr-gft"/>
                 <constraint firstItem="3wv-QO-5sp" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="taW-pu-nzJ"/>
             </constraints>
             <point key="canvasLocation" x="-37.404580152671755" y="19.718309859154932"/>

@@ -9,7 +9,7 @@ import Foundation
 
 extension PasscodeViewController {
     func postLogin(username: String, passcode: String, completion: @escaping (Result<ResponseLogin, Error>) -> Void) {
-        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/user/loginV2") else {
+        guard let url = URL(string: "https://bustracker.azurewebsites.net/api/2/user/loginV2") else {
             DispatchQueue.main.async {
                 completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
             }

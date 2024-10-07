@@ -13,6 +13,7 @@ import CoreLocation
 
 class HomeViewController: BaseViewController, UIViewControllerTransitioningDelegate {
     
+    @IBOutlet weak var titleComponent: UILabel!
     @IBOutlet weak var mapView: GMSMapView!
     @IBOutlet weak var markerImageView: UIImageView!
     @IBOutlet weak var containerScheduledView: UIView!
@@ -23,62 +24,71 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
     @IBOutlet weak var finishButton: UIButton!
     @IBOutlet weak var notificationIcon: UIImageView!
     @IBOutlet weak var vehicleNumber: UILabel!
+    var lastUpdatedHeading: CLLocationDirection = 0 // To track the last heading update
+    let headingThreshold: CLLocationDirection = 25
+    var isAutoUpdatingHeading = true
+    let marker = GMSMarker()
+    var markers: [GMSMarker] = []
+    let path = GMSMutablePath()
+    let customButton = UIButton(type: .custom)
+    var backgroundTimestamp: Date?
+    var isOn = true
+    var timeElapsed: TimeInterval = 0
     var userData: UserData?
     var tripsData: TripsData?
+    var otherTripsData: AllTripsData?
     let locationManager = CLLocationManager()
     var timer: Timer?
     var currentLocation: CLLocation?
     @IBOutlet weak var calendarImage: UIImageView!
     var isLocationRetrieved = false
+    var isCurrenntTrip = true
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
     
     let pathData: [[String: Double]] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView.delegate = self
-        //        let pulseView = PulsingView()
-        //        pulseView.translatesAutoresizingMaskIntoConstraints = false
-        //        pulseView.center = CGPoint(x: markerImageView.bounds.midX, y: markerImageView.bounds.midY + -30)
-        //        self.mapView.addSubview(pulseView)
-        
         
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
         locationManager.requestWhenInUseAuthorization()
-        // Request permission
         locationManager.requestWhenInUseAuthorization()
+        locationManager.allowsBackgroundLocationUpdates = true
+        locationManager.pausesLocationUpdatesAutomatically = false
+        
+        setupRighButtonNav()
         
         locationManager.startUpdatingLocation()
-        self.postAll() { result in
-            switch result {
-            case .success(let responseModel):
-                if responseModel.success == false {
-                    self.showBasicModal(title: "Info", message: "This job is already expired")
+        if isCurrenntTrip == true {
+            self.postAll() { result in
+                switch result {
+                case .success(let responseModel):
+                    if responseModel.success == false {
+                        self.showBasicModal(title: "Info", message: "This job is already expired")
+                        self.setupUI()
+                    }
+                    if responseModel.success, let data = responseModel.data {
+                        self.tripsData = data
+                        self.setupUI()
+                    } else {
+                        print("All trips data is empty.")
+                    }
+                case .failure(let error):
+                    print("failed post all job")
                 }
-                if responseModel.success, let data = responseModel.data {
-                    self.tripsData = data
-                    let startpoint = data.points?.first?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
-                    let endpoint = data.points?.last?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
-                    
-                    self.startPoinnt.text = startpoint?.capitalized
-                    self.endPoint.text = endpoint?.capitalized
-                    self.goTime.text = (data.points?.first?.time ?? "") + " to " + (data.points?.last?.time ?? "")
-                    self.setupUI()
-                } else {
-                    print("All trips data is empty.")
-                }
-            case .failure(let error):
-                print("failed post all job")
             }
+        } else {
+            self.setupOtherTrip(otherTripsData: otherTripsData)
         }
+        
         startTimer()
         routeToScheduled()
         containerScheduledView.layer.cornerRadius = 16
         containerScheduledView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // Top left and top right corners only
         containerScheduledView.clipsToBounds = true
-    }
-    
-    func setupUI() {
+        
         let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
         calendarImage.isUserInteractionEnabled = true
         calendarImage.addGestureRecognizer(tapGestureRecognizer)
@@ -86,7 +96,153 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
         notificationIcon.isUserInteractionEnabled = true
         notificationIcon.addGestureRecognizer(tapToMaps)
         
+        if isAutoUpdatingHeading {
+            locationManager.startUpdatingHeading()
+        }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(stopLocationUpdates), name: Notification.Name("UserLoggedOut"), object: nil)
+    }
+    
+    deinit {
+           NotificationCenter.default.removeObserver(self, name: Notification.Name("UserLoggedOut"), object: nil)
+       }
+    
+    @objc func stopLocationUpdates() {
+          // Invalidate timer and stop location updates
+          timer?.invalidate()
+          locationManager.stopUpdatingLocation()
+      }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if backgroundTask != .invalid {
+            UIApplication.shared.endBackgroundTask(backgroundTask)
+            backgroundTask = .invalid
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startTimer()
+        // Retrieve current location only for the first time
+        if !isLocationRetrieved {
+            locationManager.startUpdatingLocation()
+        }
+    }
+    
+    func setupOtherTrip(otherTripsData: AllTripsData?) {
+        self.titleComponent.text = "Viewing Trip"
+        self.finishButton.isHidden = false
+        self.finishButton.setTitle("Reload Trip", for: .normal)
+        self.vehicleNumber.text = "Vehicle No: " + (otherTripsData?.vehicleNo ?? "-")
+        let startpoint = otherTripsData?.points?.first?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
+        let endpoint = otherTripsData?.points?.last?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
+        self.startPoinnt.text = startpoint?.capitalized
+        self.endPoint.text = endpoint?.capitalized
+        self.goTime.text = (otherTripsData?.points?.first?.time ?? "") + " to " + (otherTripsData?.points?.last?.time ?? "")
+        
+        let points = otherTripsData?.points ?? [Point]()
+        let paths = otherTripsData?.path ?? [Path]()
+        
+        for point in points {
+            let coordinate = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+            path.add(coordinate)
+        }
+        // Create a polyline with the path
+        let polyline = GMSPolyline(path: path)
+        polyline.strokeColor = .blue
+        polyline.strokeWidth = 5.0
+        polyline.map = mapView
+        // Add markers for each point
+        for point in points {
+            let markerPoint = GMSMarker()
+            markerPoint.position = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+            markerPoint.title = point.pointName
+            markerPoint.snippet = "Passengers: \(point.numberOfPassengers)"
+            
+            let iconName: String
+            switch point.type {
+            case 0:
+                iconName = "green_marker" // Green icon for type 0
+            case 1:
+                iconName = "blue_marker"  // Blue icon for type 1
+            default:
+                iconName = "" // Default icon if needed
+            }
+            
+            if otherTripsData?.codeName?.lowercased() == "adhoc" {
+                let markerView = CustomMarkerView(iconName: iconName, numberOfPassengers: "", title: point.time)
+                if let markerImage = markerView.asImage() {
+                    markerPoint.icon = markerImage
+                    markerPoint.map = mapView
+                    markers.append(markerPoint)
+                }
+            } else {
+                let markerView = CustomMarkerView(iconName: iconName, numberOfPassengers: String(point.numberOfPassengers), title: point.time)
+                if let markerImage = markerView.asImage() {
+                    markerPoint.icon = markerImage
+                    markerPoint.map = mapView
+                    markers.append(markerPoint)
+                }
+            }
+        }
+        
+        if otherTripsData?.codeName?.lowercased() == "adhoc" {
+            if otherTripsData?.adhoc?.serviceType?.lowercased() == "disposal" {
+                if let codeName = otherTripsData?.codeName,
+                   let adhoc = otherTripsData?.adhoc {
+                    let duration = adhoc.duration ?? ""
+                    let serviceType = adhoc.serviceType ?? ""
+                    self.destinationTitleTripLabel.text = (otherTripsData?.codeName ?? "") + " (\(duration)h \(serviceType))"
+                } else {
+                    self.destinationTitleTripLabel.text = (otherTripsData?.codeName ?? "") + " (\(otherTripsData?.adhoc?.serviceType ?? ""))"
+                }
+            } else {
+                if self.otherTripsData?.adhoc?.serviceType?.isEmpty == true {
+                    self.destinationTitleTripLabel.text = (otherTripsData?.codeName ?? "")
+                } else {
+                    self.destinationTitleTripLabel.text = (otherTripsData?.codeName ?? "") + " (\(otherTripsData?.adhoc?.serviceType ?? ""))"
+                }
+            }
+        } else {
+            guard let serviceType = self.otherTripsData?.adhoc?.serviceType else {
+                self.destinationTitleTripLabel.text = (otherTripsData?.codeName ?? "")
+                return
+            }
+            if self.otherTripsData?.adhoc?.serviceType?.isEmpty == true {
+                self.destinationTitleTripLabel.text = (otherTripsData?.codeName ?? "")
+            } else {
+                self.destinationTitleTripLabel.text = (otherTripsData?.codeName ?? "") + " (\(otherTripsData?.adhoc?.serviceType ?? "-"))"
+            }
+        }
+    }
+    
+    func setupRighButtonNav() {
+        customButton.setTitle("CAMERA-AUTO", for: .normal)
+        customButton.setTitleColor(.white, for: .normal)
+        customButton.titleLabel?.font =  UIFont.systemFont(ofSize: 12)
+        customButton.titleLabel?.textAlignment = .center
+        customButton.backgroundColor = .systemBlue
+        customButton.frame = CGRect(x: 0, y: 0, width: 140, height: 40)
+        customButton.addTarget(self, action: #selector(tappedCamera), for: .touchUpInside)
+        
+        // Create a UIBarButtonItem using the custom button
+        let rightBarButton = UIBarButtonItem(customView: customButton)
+        
+        // Set the custom view as the right bar button item
+        self.navigationItem.rightBarButtonItem = rightBarButton
+    }
+    
+    func setupUI() {
+        self.titleComponent.text = "Current Trip"
+        self.finishButton.setTitle("End Trip", for: .normal)
         self.vehicleNumber.text = "Vehicle No: " + (tripsData?.vehicleNo ?? "-")
+        let startpoint = tripsData?.points?.first?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
+        let endpoint = tripsData?.points?.last?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
+        self.startPoinnt.text = startpoint?.capitalized
+        self.endPoint.text = endpoint?.capitalized
+        self.goTime.text = (tripsData?.points?.first?.time ?? "") + " to " + (tripsData?.points?.last?.time ?? "")
+        
         if tripsData?.codeName?.lowercased() == "adhoc" {
             if tripsData?.adhoc?.serviceType?.lowercased() == "disposal" {
                 if let codeName = tripsData?.codeName,
@@ -106,22 +262,58 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
             }
             self.finishButton.isHidden = false
         } else {
+            if tripsData?.codeName?.lowercased() == "sgk" {
+                self.finishButton.isHidden = false
+            } else {
+                self.finishButton.isHidden = true
+            }
+            
             if self.tripsData?.adhoc?.serviceType?.isEmpty == true {
                 self.destinationTitleTripLabel.text = (tripsData?.codeName ?? "")
             } else {
                 self.destinationTitleTripLabel.text = (tripsData?.codeName ?? "") + " (\(tripsData?.adhoc?.serviceType ?? "-"))"
             }
         }
+        setupMaps()
     }
     
     @objc func routeToGmaps(){
-        if let url = generateGoogleMapsURL(from: tripsData?.points ?? [Point]()) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if isCurrenntTrip == true {
+            if let url = generateGoogleMapsURL(from: tripsData?.points ?? [Point]()) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        } else {
+            if let url = generateGoogleMapsURL(from: otherTripsData?.points ?? [Point]()) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        
+    }
+    
+    @objc func tappedCamera(){
+        isOn.toggle()
+        isAutoUpdatingHeading.toggle()
+        
+        if isAutoUpdatingHeading {
+            locationManager.startUpdatingHeading()
+        } else {
+            locationManager.stopUpdatingHeading()
+        }
+        
+        if isOn {
+            customButton.setTitle("CAMERA-AUTO", for: .normal)
+            customButton.setTitleColor(.white, for: .normal)
+            customButton.titleLabel?.font =  UIFont.systemFont(ofSize: 12)
+            customButton.backgroundColor = .systemBlue
+        } else {
+            customButton.setTitle("CAMERA-MANUAL", for: .normal)
+            customButton.setTitleColor(.white, for: .normal)
+            customButton.titleLabel?.font =  UIFont.systemFont(ofSize: 12)
+            customButton.backgroundColor = .gray
         }
     }
     
     func generateGoogleMapsURL(from points: [Point]) -> URL? {
-        // Find the destination point
         guard let destination = points.first(where: { $0.type == 1 }) else {
             showAlert(title: "Missing Point", message: "Destination point is missing")
             return nil
@@ -155,9 +347,31 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
     
     func startTimer() {
         timer?.invalidate()
+        backgroundTask = UIApplication.shared.beginBackgroundTask(withName: "LocationUpdate") {
+            UIApplication.shared.endBackgroundTask(self.backgroundTask)
+            self.backgroundTask = .invalid
+        }
         
-        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(sendLocationUpdate), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true) { [weak self] _ in
+                  self?.sendLocationUpdate()
+              }
+//        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(sendLocationUpdate), userInfo: nil, repeats: true)
         RunLoop.current.add(timer!, forMode: RunLoop.Mode.default)
+    }
+    
+    // Called when the app is about to go to the background
+    @objc func appWillResignActive() {
+        backgroundTimestamp = Date() // Save the current timestamp
+        timer?.invalidate() // Invalidate the timer while in the background
+    }
+    
+    // Called when the app returns to the foreground
+    @objc func appDidBecomeActive() {
+        if let backgroundTimestamp = backgroundTimestamp {
+            let timeInBackground = Date().timeIntervalSince(backgroundTimestamp)
+            timeElapsed += timeInBackground // Add the background time to the timer
+        }
+        startTimer() // Restart the timer
     }
     
     @objc func imageTapped() {
@@ -180,32 +394,41 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
             action: #selector(handleTap))
         self.navigationItem.leftBarButtonItem = customBackButton
         self.navigationItem.title = "Tracker"
-        self.postAll() { result in
-            switch result {
-            case .success(let responseModel):
-                if responseModel.success == false {
-                    self.showBasicModal(title: "Info", message: "This job is already expired.")
-                }
-                if responseModel.success, let data = responseModel.data {
-                    self.tripsData = data
-                    let startpoint = data.points?.first?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
-                    let endpoint = data.points?.last?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
-                    self.startPoinnt.text = startpoint?.capitalized
-                    self.endPoint.text = endpoint?.capitalized
-                    if data.codeName?.lowercased() == "adhoc" {
-                        self.finishButton.isHidden = false
+        if isCurrenntTrip == true {
+            self.postAll() { result in
+                switch result {
+                case .success(let responseModel):
+                    if responseModel.success == false {
+                        self.showBasicModal(title: "Info", message: "This job is already expired.")
+                        self.setupUI()
                     }
-                    self.goTime.text = (data.points?[0].time ?? "") + " to " + (data.points?[1].time ?? "")
-                } else {
-                    print("All trips data is empty.")
+                    if responseModel.success, let data = responseModel.data {
+                        self.tripsData = data
+                        self.setupUI()
+                    } else {
+                        print("All trips data is empty.")
+                    }
+                case .failure(let error):
+                    print("failed post all job")
                 }
-            case .failure(let error):
-                print("failed post all job")
             }
+        } else {
+            self.setupOtherTrip(otherTripsData: otherTripsData)
         }
+        
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
+        calendarImage.isUserInteractionEnabled = true
+        calendarImage.addGestureRecognizer(tapGestureRecognizer)
+        let tapToMaps = UITapGestureRecognizer(target: self, action: #selector(routeToGmaps))
+        notificationIcon.isUserInteractionEnabled = true
+        notificationIcon.addGestureRecognizer(tapToMaps)
+        
         startTimer()
-        routeToScheduled()
-        setupUI()
+    }
+    
+    func resetData() {
+        self.tripsData = nil
+        self.otherTripsData = nil
     }
     
     func setupMaps() {
@@ -217,6 +440,11 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
             let camera = GMSCameraPosition.camera(
                 withLatitude:  location.coordinate.latitude, longitude: location.coordinate.longitude, zoom: 12.0
             )
+            self.marker.position = CLLocationCoordinate2D(
+                latitude: self.currentLocation?.coordinate.latitude ?? 0.0,
+                longitude: self.currentLocation?.coordinate.longitude ?? 0.0)
+            self.marker.icon = UIImage(systemName: "bus.fill")
+            self.marker.map = self.mapView
             self.mapView.camera = camera
             print(">>>> location zoom : \(camera.zoom)")
         }
@@ -224,9 +452,12 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
         self.mapView.bringSubviewToFront(notificationIcon)
         self.mapView.bringSubviewToFront(markerImageView)
         
-        let points = tripsData?.points ?? [Point]()
-        let paths = tripsData?.path ?? [Path]()
-        let path = GMSMutablePath()
+        let points: [Point]
+        let paths: [Path]
+        
+        points = tripsData?.points ?? [Point]()
+        paths = tripsData?.path ?? [Path]()
+        
         for point in paths {
             let coordinate = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
             path.add(coordinate)
@@ -237,13 +468,11 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
         polyline.strokeWidth = 5.0
         polyline.map = mapView
         
-        
-        // Add markers for each point
         for point in points {
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
-            marker.title = point.pointName
-            marker.snippet = "Passengers: \(point.numberOfPassengers)"
+            let markerPoint = GMSMarker()
+            markerPoint.position = CLLocationCoordinate2D(latitude: point.latitude, longitude: point.longitude)
+            markerPoint.title = point.pointName
+            markerPoint.snippet = "Passengers: \(point.numberOfPassengers)"
             
             let iconName: String
             switch point.type {
@@ -256,19 +485,19 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
             }
             
             if tripsData?.codeName?.lowercased() == "adhoc" {
-                let markerView = CustomMarkerView(iconName: iconName, numberOfPassengers: "")
+                let markerView = CustomMarkerView(iconName: iconName, numberOfPassengers: "", title: point.time)
                 if let markerImage = markerView.asImage() {
-                    marker.icon = markerImage
+                    markerPoint.icon = markerImage
+                    markerPoint.map = mapView
+                    markers.append(markerPoint)
                 }
-                
-                marker.map = mapView
             } else {
-                let markerView = CustomMarkerView(iconName: iconName, numberOfPassengers: String(point.numberOfPassengers))
+                let markerView = CustomMarkerView(iconName: iconName, numberOfPassengers: String(point.numberOfPassengers), title: point.time)
                 if let markerImage = markerView.asImage() {
-                    marker.icon = markerImage
+                    markerPoint.icon = markerImage
+                    markerPoint.map = mapView
+                    markers.append(markerPoint)
                 }
-                
-                marker.map = mapView
             }
         }
     }
@@ -282,7 +511,7 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
             print("No location available")
             return
         }
-        
+        print(">>>> GPS")
         // Prepare the data to be sent
         let latitude = location.coordinate.latitude
         let longitude = location.coordinate.longitude
@@ -294,141 +523,52 @@ class HomeViewController: BaseViewController, UIViewControllerTransitioningDeleg
         // Call the function to send data
         sendLocationData(latitude: latitude, longitude: longitude, altitude: altitude, accuracy: accuracy, speed: speed, date: date)
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        // Invalidate the timer when the view is dismissed
-        timer?.invalidate()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        // Retrieve current location only for the first time
-        if !isLocationRetrieved {
-            locationManager.startUpdatingLocation()
+    // Function to clear only the points in the path
+    func clearPathPoints() {
+        for item in markers {
+            item.map = nil
         }
+        markers.removeAll()
+        mapView.clear()
+        path.removeAllCoordinates()
     }
     @IBAction func finishTripTapped(_ sender: Any) {
-        self.endTrips(accessCode: tripsData?.adhoc?.busCharterID ?? "") { result in
-            switch result {
-            case .success(let responseModel):
-                if responseModel.success == false {
-                    self.showBasicModal(title: "Info", message: "The Services is not response")
-                }
-                if responseModel.success, let data = responseModel.data {
-                    self.postAll() { result in
-                        switch result {
-                        case .success(let responseModel):
-                            if responseModel.success == false {
-                                self.showBasicModal(title: "Info", message: "This job is already expired")
-                            }
-                            if responseModel.success, let data = responseModel.data {
-                                self.tripsData = data
-                                let startpoint = data.points?.first?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
-                                let endpoint = data.points?.last?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
-                                
-                                self.startPoinnt.text = startpoint?.capitalized
-                                self.endPoint.text = endpoint?.capitalized
-                                self.goTime.text = (data.points?.first?.time ?? "") + " to " + (data.points?.last?.time ?? "")
-                                self.setupUI()
-                            } else {
-                                print("All trips data is empty.")
-                            }
-                        case .failure(let error):
-                            print("failed post all job")
-                        }
+        if isCurrenntTrip == true {
+            self.endTrips(accessCode: tripsData?.routeID ?? 0) { result in
+                switch result {
+                case .success(let responseModel):
+                    if responseModel.success == false {
+                        self.showBasicModal(title: "Info", message: "The Services is not response")
+                    } else {
+                        self.setupUI()
                     }
-                } else {
-                    self.showBasicModal(title: "Error", message: responseModel.data?.message ?? "")
+                case .failure(let error):
+                    self.showBasicModal(title: "Error", message: error.localizedDescription)
                 }
-            case .failure(let error):
-                self.showBasicModal(title: "Error", message: error.localizedDescription)
             }
-        }
-    }
-    
-}
-
-extension HomeViewController: GMSMapViewDelegate {
-    func mapView(_ mapView: GMSMapView, idleAt position: GMSCameraPosition) {
-        let camera = GMSCameraPosition.camera(
-            withLatitude: position.target.latitude,
-            longitude: position.target.longitude,
-            zoom: position.zoom)
-        mapView.camera = camera
-        print(">>>> location zoom : \(position.zoom)")
-    }
-    
-    func mapView(_ mapView: GMSMapView, didChange position: GMSCameraPosition) {
-        print(">>>> location zoom : \(position.zoom)")
-    }
-    
-    func mapView(_ mapView: GMSMapView, willMove gesture: Bool) {
-        print(">>>> location zoom : \(mapView.camera.zoom)")
-    }
-}
-
-extension HomeViewController: CLLocationManagerDelegate {
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        currentLocation = locations.last
-        if let location = locations.first, !isLocationRetrieved {
-            // Stop updating location after the first fetch
-            locationManager.stopUpdatingLocation()
-            isLocationRetrieved = true
-            setupMaps()
-        }
-        DispatchQueue.main.async {
-            let marker = GMSMarker()
-            marker.position = CLLocationCoordinate2D(
-                latitude: self.currentLocation?.coordinate.latitude ?? 0.0,
-                longitude: self.currentLocation?.coordinate.longitude ?? 0.0)
-            marker.icon = UIImage(systemName: "bus.fill")
-            marker.map = self.mapView
-        }
-    }
-    
-    // Handle location authorization status changes
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        if status == .authorizedWhenInUse {
-            locationManager.startUpdatingLocation()
         } else {
-            // Handle permission denial
-            print("Location permission denied")
-        }
-    }
-    
-    // Handle errors
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print("Error fetching location: \(error.localizedDescription)")
-    }
-}
-
-extension HomeViewController: ScheduledViewControllerProtocol {
-    func didDismissView() {
-        self.postAll() { result in
-            switch result {
-            case .success(let responseModel):
-                if responseModel.success == false {
-                    self.showBasicModal(title: "Info", message: "This job is already expired.")
-                }
-                if responseModel.success, let data = responseModel.data {
-                    self.tripsData = data
-                    let startpoint = data.points?.first?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
-                    let endpoint = data.points?.last?.pointName.lowercased().replacingOccurrences(of: "bus stop opp", with: "")
-                    self.startPoinnt.text = startpoint?.capitalized
-                    self.endPoint.text = endpoint?.capitalized
-                    if data.codeName?.lowercased() == "adhoc" {
-                        self.finishButton.isHidden = false
+            isCurrenntTrip.toggle()
+            self.clearPathPoints()
+            self.postAll() { result in
+                switch result {
+                case .success(let responseModel):
+                    if responseModel.success == false {
+                        self.showBasicModal(title: "Info", message: "This job is already expired.")
                     }
-                    self.goTime.text = (data.points?[0].time ?? "") + " to " + (data.points?[1].time ?? "")
-                    self.setupUI()
-                } else {
-                    print("All trips data is empty.")
+                    if responseModel.success, let data = responseModel.data {
+                        self.tripsData = data
+                        self.setupUI()
+                    } else {
+                        print("All trips data is empty.")
+                    }
+                case .failure(let error):
+                    print("failed post all job")
                 }
-            case .failure(let error):
-                print("failed post all job")
             }
         }
     }
+}
+
+fileprivate func convertToUIBackgroundTaskIdentifier(_ input: Int) -> UIBackgroundTaskIdentifier {
+    return UIBackgroundTaskIdentifier(rawValue: input)
 }

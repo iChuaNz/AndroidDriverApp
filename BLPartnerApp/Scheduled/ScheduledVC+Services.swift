@@ -9,7 +9,7 @@ import Foundation
 
 extension ScheduledViewController {
     func postAll(completion: @escaping (Result<ResponseAllTrips, Error>) -> Void) {
-        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/Jobs/AllTrips") else {
+        guard let url = URL(string: "https://bustracker.azurewebsites.net/api/2/Jobs/AllTrips") else {
             DispatchQueue.main.async {
                 completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
             }

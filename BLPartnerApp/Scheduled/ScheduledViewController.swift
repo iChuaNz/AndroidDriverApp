@@ -8,12 +8,15 @@
 import UIKit
 protocol ScheduledViewControllerProtocol: AnyObject {
     func didDismissView()
+    
+    func didDismissWithObject(isCurrentTrip: Bool, trip: AllTripsData)
 }
 
 class ScheduledViewController: BaseViewController {
     @IBOutlet weak var segmentedDay: UISegmentedControl!
     @IBOutlet weak var scheduledTableView: UITableView!
     @IBOutlet weak var containerScheduledView: UIView!
+    @IBOutlet weak var containerView: UIView!
     
     weak var delegate: ScheduledViewControllerProtocol?
     var jobsData: [JobsData] = []
@@ -29,8 +32,13 @@ class ScheduledViewController: BaseViewController {
         segmentedDay.addTarget(self, action: #selector(segmentChanged(_:)), for: .valueChanged)
         containerScheduledView.layer.cornerRadius = 16
         containerScheduledView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-        self.view.isUserInteractionEnabled = true
-        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissContent)))
+        self.containerView.isUserInteractionEnabled = true
+        self.containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(dismissContent)))
+    }
+    
+    @objc override func dismissContent() {
+        self.dismiss(animated: false)
+        delegate?.didDismissView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -60,13 +68,6 @@ class ScheduledViewController: BaseViewController {
             }
         }
     }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-           super.viewDidDisappear(animated)
-           
-           // Panggil delegate setelah view di-dismiss
-           delegate?.didDismissView()
-       }
     
     func setupTableView() {
         self.scheduledTableView.dataSource = self
@@ -124,5 +125,18 @@ extension ScheduledViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch segmentedDay.selectedSegmentIndex {
+        case 0:
+            self.dismiss(animated: false)
+            delegate?.didDismissWithObject(isCurrentTrip: false, trip: self.todayData[indexPath.row])
+        case 1:
+            self.dismiss(animated: false)
+            delegate?.didDismissWithObject(isCurrentTrip: false, trip: self.tomorrowsData[indexPath.row])
+        default:
+            break
+        }
     }
 }

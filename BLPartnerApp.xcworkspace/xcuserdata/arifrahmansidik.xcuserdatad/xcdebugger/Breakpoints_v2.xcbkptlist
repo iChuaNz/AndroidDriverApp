@@ -7,158 +7,80 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "CAF52E1E-DB04-4E24-855E-D6F28CFDCAB8"
+            uuid = "A929D22F-017F-4D6E-92A3-D62FA33226EC"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLPartnerApp/Home/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "261"
-            endingLineNumber = "261"
-            landmarkName = "setupMaps()"
+            startingLineNumber = "139"
+            endingLineNumber = "139"
+            landmarkName = "setupOtherTrip(otherTripsData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "55E39718-B6B5-4FCA-9A71-F1B96B619962"
+            uuid = "E19F4C3D-F5FF-41F2-9D60-840DCF718C0A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLPartnerApp/Home/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "268"
-            endingLineNumber = "268"
-            landmarkName = "setupMaps()"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
+            landmarkName = "setupOtherTrip(otherTripsData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "833C3691-3ABA-45EF-A02B-C832E55C8530"
+            uuid = "4D9D6A7F-D19E-4396-99D5-D0223BB33CB1"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLPartnerApp/Home/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "setupMaps()"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
+            landmarkName = "setupOtherTrip(otherTripsData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7F63990B-90DF-40B3-9FC0-27A0195EF69B"
+            uuid = "F0C488EA-2782-4474-B97F-4F25E8540FBE"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLPartnerApp/Home/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "218"
-            endingLineNumber = "218"
-            landmarkName = "setupMaps()"
+            startingLineNumber = "178"
+            endingLineNumber = "178"
+            landmarkName = "setupOtherTrip(otherTripsData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9C42BFA2-F839-4EAF-91A4-4CE8A5770B89"
+            uuid = "8CC07928-41E4-45BC-AAD1-F8A448A51364"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "BLPartnerApp/Home/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
-            landmarkName = "setupMaps()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1C014EF8-B188-454C-8B64-E1E6CBD677DA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BLPartnerApp/Home/HomeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "379"
-            endingLineNumber = "379"
-            landmarkName = "locationManager(_:didUpdateLocations:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "73381EE0-BAE4-4415-AEF4-A81A1B93EEFB"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BLPartnerApp/Home/HomeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
-            landmarkName = "setupMaps()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "73381EE0-BAE4-4415-AEF4-A81A1B93EEFB - 5e6850a5ee9842d6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BLPartnerApp.HomeViewController.setupMaps() -&gt; ()"
-                  moduleName = "BLPartnerApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/arifrahmansidik/Documents/SwiftBLPartner/BLPartnerApp/BLPartnerApp/Home/HomeViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "242"
-                  endingLineNumber = "242">
-               </Location>
-               <Location
-                  uuid = "73381EE0-BAE4-4415-AEF4-A81A1B93EEFB - 5e6850a5ee9842d6"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "BLPartnerApp.HomeViewController.setupMaps() -&gt; ()"
-                  moduleName = "BLPartnerApp"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/arifrahmansidik/Documents/SwiftBLPartner/BLPartnerApp/BLPartnerApp/Home/HomeViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "242"
-                  endingLineNumber = "242">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "7343B4C6-624A-4F54-875B-E85B1D46AF8E"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "BLPartnerApp/Home/HomeViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "246"
-            endingLineNumber = "246"
-            landmarkName = "setupMaps()"
+            startingLineNumber = "185"
+            endingLineNumber = "185"
+            landmarkName = "setupOtherTrip(otherTripsData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

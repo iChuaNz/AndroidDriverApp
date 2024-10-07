@@ -15,6 +15,7 @@
 		7F18AC5B2C901C38009D74AC /* PulsingRadialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F18AC5A2C901C38009D74AC /* PulsingRadialView.swift */; };
 		7F4915732C8845230005E791 /* BasicModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F4915712C8845230005E791 /* BasicModalViewController.swift */; };
 		7F4915742C8845230005E791 /* BasicModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F4915722C8845230005E791 /* BasicModalViewController.xib */; };
+		7F6ED4AF2C99775F00938E3E /* HomeViewController+CLLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6ED4AE2C99775F00938E3E /* HomeViewController+CLLocationManager.swift */; };
 		7F96C72F2C7C7B3400D1C1FC /* ResponseAllTrips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F96C72E2C7C7B3400D1C1FC /* ResponseAllTrips.swift */; };
 		7F9AEBF32C8507FB002C2AB3 /* HomeViewController+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F9AEBF22C8507FB002C2AB3 /* HomeViewController+Extension.swift */; };
 		7F9EF60A2C4FB2F600A6C1C6 /* SettingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7F9EF6092C4FB2F600A6C1C6 /* SettingViewController.xib */; };
@@ -84,6 +85,7 @@
 		7F18AC5A2C901C38009D74AC /* PulsingRadialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PulsingRadialView.swift; sourceTree = "<group>"; };
 		7F4915712C8845230005E791 /* BasicModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicModalViewController.swift; sourceTree = "<group>"; };
 		7F4915722C8845230005E791 /* BasicModalViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BasicModalViewController.xib; sourceTree = "<group>"; };
+		7F6ED4AE2C99775F00938E3E /* HomeViewController+CLLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+CLLocationManager.swift"; sourceTree = "<group>"; };
 		7F96C72E2C7C7B3400D1C1FC /* ResponseAllTrips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseAllTrips.swift; sourceTree = "<group>"; };
 		7F9AEBF22C8507FB002C2AB3 /* HomeViewController+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "HomeViewController+Extension.swift"; sourceTree = "<group>"; };
 		7F9EF6082C4FB2F600A6C1C6 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				7FBE53E82C4A8F8B00C1F5AF /* HomeViewController.xib */,
 				7F9AEBF22C8507FB002C2AB3 /* HomeViewController+Extension.swift */,
 				7F18AC552C8FF768009D74AC /* Directions.geojson */,
+				7F6ED4AE2C99775F00938E3E /* HomeViewController+CLLocationManager.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -643,6 +646,7 @@
 				7F9EF6162C510EF400A6C1C6 /* EndPoint.swift in Sources */,
 				7F4915732C8845230005E791 /* BasicModalViewController.swift in Sources */,
 				7FF8E6D32C81AAB900A1D9C5 /* ResponseTrips.swift in Sources */,
+				7F6ED4AF2C99775F00938E3E /* HomeViewController+CLLocationManager.swift in Sources */,
 				7FA0D2AA2C5CFA7300259DBD /* ResponseLogin.swift in Sources */,
 				7F18AC5B2C901C38009D74AC /* PulsingRadialView.swift in Sources */,
 				7FC17AF62C6E14010008F6FA /* BaseViewController.swift in Sources */,
@@ -821,9 +825,10 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
-				VALIDATE_PRODUCT = YES;
+				VALIDATE_PRODUCT = NO;
 			};
 			name = Release;
 		};
@@ -831,26 +836,32 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 366DA0D09910F47B7E84D18A /* Pods-BLPartnerApp.debug.xcconfig */;
 			buildSettings = {
+				APP_NAME = "BLPartner Staging";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = BLPartnerApp/BLPartnerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20240913001;
+				CURRENT_PROJECT_VERSION = 20241001001;
 				DEVELOPMENT_TEAM = 86R52TH368;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BLPartnerApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = "BLPartner Staging";
 				INFOPLIST_KEY_LSApplicationCategoryType = "<dict>\n    <key>aps-environment</key>\n    <string>development</string> <!-- or \"production\" for App Store builds -->\n</dict>";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location at all times.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location even in the background.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide updates.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Laun;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 3.0.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "sg.com.commute-solutions.bustracker";
+				PRODUCT_BUNDLE_IDENTIFIER = "sg.com.commute-solutions.bustracker.staging";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -866,20 +877,26 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = B4C264CFAC363CAEAC42831B /* Pods-BLPartnerApp.release.xcconfig */;
 			buildSettings = {
+				APP_NAME = BLPartner;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_ENTITLEMENTS = BLPartnerApp/BLPartnerApp.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 20240913001;
+				CURRENT_PROJECT_VERSION = 20241001001;
 				DEVELOPMENT_TEAM = 86R52TH368;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = BLPartnerApp/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = BLPartner;
 				INFOPLIST_KEY_LSApplicationCategoryType = "<dict>\n    <key>aps-environment</key>\n    <string>development</string> <!-- or \"production\" for App Store builds -->\n</dict>";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "We need your location at all times.";
+				INFOPLIST_KEY_NSLocationAlwaysUsageDescription = "We need your location even in the background.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "We need your location to provide updates.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = Laun;
 				INFOPLIST_KEY_UIRequiresFullScreen = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

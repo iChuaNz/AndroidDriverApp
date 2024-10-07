@@ -2,12 +2,12 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
-    <key>LSApplicationQueriesSchemes</key>
-    <array>
-        <string>comgooglemaps</string>
-    </array>
+	<key>ITSAppUsesNonExemptEncryption</key>
+	<false/>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>comgooglemaps</string>
+	</array>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>FirebaseMessagingAutoInitEnabled</key>
@@ -27,12 +27,6 @@
 			</array>
 		</dict>
 	</dict>
-    <key>ITSAppUsesNonExemptEncryption</key>
-    <false/>
-    <key>NSLocationWhenInUseUsageDescription</key>
-    <string>We need your location to provide accurate data.</string>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>We need your location even when the app is in the background.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>bluetooth-central</string>

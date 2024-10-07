@@ -34,7 +34,7 @@ class BaseViewController: UIViewController {
     }
     
     public func sendLocationData(latitude: Double, longitude: Double, altitude: Double, accuracy: Double, speed: Double, date: String) {
-        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/locations/gps") else {
+        guard let url = URL(string: "https://bustracker.azurewebsites.net/api/2/locations/gps") else {
             print("Invalid URL")
             return
         }
@@ -49,21 +49,22 @@ class BaseViewController: UIViewController {
         request.addValue(token, forHTTPHeaderField: "token")
 
         // Prepare the request body
-        let requestBody: [String: Any] = [
-            "latitude": latitude,
-            "longitude": longitude,
-            "altitude": altitude,
-            "accuracy": accuracy,
-            "speed": speed,
-            "date": date
+        let locationList: [[String: Any]] = [
+            [
+                "altitude": altitude,
+                "speed": speed,
+                "latitude": latitude,
+                "longitude": longitude,
+                "accuracy": accuracy,
+                "datecreated": date
+            ]
         ]
 
-        do {
-            request.httpBody = try JSONSerialization.data(withJSONObject: requestBody, options: .prettyPrinted)
-        } catch let error {
-            print("Error serializing JSON: \(error)")
-            return
-        }
+        // Convert the body to JSON data
+        let body: [String: Any] = ["locationList": locationList]
+        guard let jsonData = try? JSONSerialization.data(withJSONObject: body, options: []) else { return }
+        
+        request.httpBody = jsonData
 
         // Send the request
         let task = URLSession.shared.dataTask(with: request) { data, response, error in

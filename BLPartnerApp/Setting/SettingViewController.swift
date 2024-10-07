@@ -54,6 +54,7 @@ class SettingViewController: UIViewController {
             switch result {
             case .success(let responseString):
                 self.routeToLogin()
+                NotificationCenter.default.post(name: Notification.Name("UserLoggedOut"), object: nil)
                 print("=== Response data: \(responseString)")
             case .failure(let error):
                 self.routeToLogin()
@@ -65,7 +66,7 @@ class SettingViewController: UIViewController {
 
 extension SettingViewController {
     func getProfile(completion: @escaping (Result<String, Error>) -> Void) {
-        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/vendor/profile") else {
+        guard let url = URL(string: "https://bustracker.azurewebsites.net/api/2/vendor/profile") else {
             DispatchQueue.main.async {
                 completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
             }
@@ -75,12 +76,7 @@ extension SettingViewController {
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        let parameters: [String: Any] = [
-            "deviceToken": UserDefaults.standard.string(forKey: "FCMToken") ?? ""
-        ]
-        
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+        request.addValue(userData?.token ?? "", forHTTPHeaderField: "token")
         
         // Create a URLSession
         let session = URLSession.shared
@@ -122,7 +118,7 @@ extension SettingViewController {
     }
     
     func logout(completion: @escaping (Result<String, Error>) -> Void) {
-        guard let url = URL(string: "https://bustrackerstaging.azurewebsites.net/api/2/user/logout") else {
+        guard let url = URL(string: "https://bustracker.azurewebsites.net/api/2/user/logout") else {
             DispatchQueue.main.async {
                 completion(.failure(NSError(domain: "InvalidURL", code: 0, userInfo: nil)))
             }
@@ -132,12 +128,7 @@ extension SettingViewController {
         request.httpMethod = "GET"
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
-        
-        let parameters: [String: Any] = [
-            "deviceToken": UserDefaults.standard.string(forKey: "FCMToken") ?? ""
-        ]
-        
-        request.httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: [])
+        request.addValue(userData?.token ?? "", forHTTPHeaderField: "token")
         
         // Create a URLSession
         let session = URLSession.shared
